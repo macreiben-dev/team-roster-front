@@ -1,0 +1,16 @@
+{
+  "name": "team-roaster-back",
+  "version": "1.0.0",
+  "description": "roaster bff",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "author": "Chris \"MacReiben\" Finel",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
