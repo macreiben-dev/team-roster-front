@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css & vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
+    "build:ui:watch": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css --watch",
+    "build:ui": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
