@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "start": "npx tsc && node ./dist/index.js",
-    "dev": "npx nodemon --exec npx ts-node ./index.ts"
+    "dev": "npx nodemon --exec npx ts-node ./index.ts",
+    "build": "npx tsc"
   },
   "author": "Chris \"MacReiben\" Finel",
   "license": "ISC",
