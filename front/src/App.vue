@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -8,11 +7,12 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="flex ml-4 mb-4 mt-4">
       <div class="w-1/3"><RouterLink to="/">Home</RouterLink></div>
       <div class="w-1/3"><RouterLink to="/about">About</RouterLink></div>
-      <div class="w-1/3">&nbsp;</div>
+      <div class="w-1/3"><RouterLink to="/profile">Profile</RouterLink></div>
     </div>
   </header>
-
-  <RouterView />
+  <div class="flex ml-4 mb-4 mt-4">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
