@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 const configureRoutes = (router: Router): Router => {
-  router.get("/users/1", (request, response) => {
+  router.get("api/v1/users/1", (request, response) => {
     response.send({
       user: {
         email: "dinesh@fusionauth.io",

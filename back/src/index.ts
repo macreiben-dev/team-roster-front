@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import configureRoute from "./routes";
+import configureSystemRoute from "./routes/configureSystemRoute";
 
 const session = require("express-session");
 const cors = require("cors");
@@ -10,8 +11,6 @@ const app = express();
 app.use(cors());
 
 const PORT = process.env.SERVER_PORT;
-
-app.use("/api/v1", configureRoute);
 
 app.use(
   session({
@@ -25,6 +24,8 @@ app.use(
     },
   })
 );
+
+app.use("/", configureRoute);
 
 app.use(express.json());
 
