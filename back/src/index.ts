@@ -1,8 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
-import configureRoute from "./routes";
+import configureUserRoute from "./routes/ConfigureUserRoutes";
+import configureLoginRoute from "./routes/ConfigureLoginRoute";
 
-const session = require("express-session");
+import session from "express-session";
+
 const cors = require("cors");
 
 dotenv.config();
@@ -10,8 +12,6 @@ const app = express();
 app.use(cors());
 
 const PORT = process.env.SERVER_PORT;
-
-app.use("/api/v1", configureRoute);
 
 app.use(
   session({
@@ -25,6 +25,8 @@ app.use(
     },
   })
 );
+
+app.use("/api/v1", configureUserRoute, configureLoginRoute);
 
 app.use(express.json());
 
