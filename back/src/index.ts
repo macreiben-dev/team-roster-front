@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import configureUserRoute from "./routes/ConfigureUserRoutes";
-import configureLoginRoute from "./routes/ConfigureLoginRoute";
+import configureRoute from "./routes";
+import configureSystemRoute from "./routes/configureSystemRoute";
 
 import session from "express-session";
 
@@ -26,7 +26,7 @@ app.use(
   })
 );
 
-app.use("/api/v1", configureUserRoute, configureLoginRoute);
+app.use("/", configureRoute);
 
 app.use(express.json());
 

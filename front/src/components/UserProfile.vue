@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const currentUser = ref(null)
+const currentUser = ref({ email: 'NA' })
 
 onMounted(() => {
   fetch('http://localhost:9000/api/v1/users/1')

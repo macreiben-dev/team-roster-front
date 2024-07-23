@@ -1,15 +1,13 @@
 import { Router } from "express";
 import configureUserRoutes from "./routes/ConfigureUserRoutes";
+import configureSystemRoute from "./routes/configureSystemRoute";
 
 const router = Router();
 
 const configureRoute = (router: Router): Router => {
-  router.get("/hello", (request, response) => {
-    console.debug("Healthcheck route hit");
-    response.status(200).send("I'm alive");
-  });
-
   configureUserRoutes(router);
+
+  configureSystemRoute(router);
 
   console.info("Routes configured");
 
