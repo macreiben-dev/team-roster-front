@@ -4,12 +4,12 @@ import { ref, onMounted } from 'vue'
 const currentUser = ref({ email: 'NA' })
 
 onMounted(() => {
-  fetch('http://localhost:9000/api/v1/users/1')
+  fetch('http://localhost:9000/api/v1/users/me')
     .then((response) => {
       return response.json()
     })
     .then((data) => {
-      currentUser.value = data.user
+      currentUser.value = data.introspectResponse.email
     })
     .catch((err) => {
       console.log(err)
