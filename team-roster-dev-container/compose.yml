@@ -1,0 +1,29 @@
+services:
+  api:
+    image: team-roster-api
+    environment:
+      - SERVER_PORT=9001
+      - FUSIONAUTH_PORT=9011
+      - FUSIONAUTH_SERVERNAME=localhost
+      - FUSIONAUTH_SERVERNAME_FOR_TOKEN=host.docker.internal
+      - CLIENT_ID=e6ba1ed7-e4d0-4b6a-83a5-fff95cc8cf6f
+      - CLIENT_SECRET=-8lBPZnbrkNCUB3yv55jLiYErlNDNbLNoJnJJLPnU1A
+      - REDIRECT_URI=http://localhost:9001/oauth-callback
+      - APPLICATION_ID=e6ba1ed7-e4d0-4b6a-83a5-fff95cc8cf6f
+      - API_KEY=QOWrlYNfOwfIQb5Qfq4OV1PI677INGzGsLN7dgsKrL8
+      - FRONT_APP_ROOT_URL=http://localhost:5174
+    ports:
+      - 9001:9001
+  front:
+    image: team-roster-front
+    ports:
+      - 5174:80
+  db:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=team_roster
+      - MYSQL_USER=team_roster
+      - MYSQL_PASSWORD=team_roster

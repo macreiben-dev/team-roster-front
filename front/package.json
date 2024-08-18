@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css & vite",
+    "start:dev": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css & vite  --mode development",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
-    "build-only": "vite build",
+    "build-only": "vite build --mode development",
+    "build:prod": "vite build --mode production",
     "build:ui:watch": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css --watch",
     "build:ui": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css",
     "type-check": "vue-tsc --build --force",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.7",
+    "universal-cookie": "^7.2.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
