@@ -1,8 +1,9 @@
 import { createCookieRepository } from '@/repositories/cookieRepository'
+import { ConnectedUser } from './ConnectedUser'
 
 const logContext = { module: 'UserService' }
 
-const getUserInformation = async (): Promise<ConnectedUser> => {
+const getUserInformation = async (): ConnectedUser => {
   const apiUrl = import.meta.env.VITE_API_SERVER_URL
   const apiUserMe = import.meta.env.VITE_API_PATH_ME
 
@@ -26,7 +27,7 @@ const getUserInformation = async (): Promise<ConnectedUser> => {
 
     const data = await response.json()
 
-    const connectedUser: ConnectedUser = new ConnectedUser('some.email@test.local')
+    const connectedUser: ConnectedUser = new ConnectedUser(data)
 
     return connectedUser
   } catch (err) {

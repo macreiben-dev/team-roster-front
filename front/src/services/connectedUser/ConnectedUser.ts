@@ -1,15 +1,19 @@
 class ConnectedUser {
-  private email: string
+  private _email: string
+  private _username: string
 
-  public constructor(email: string) {
-    this.email = email
+  public constructor(data: any) {
+    this._email = data.email as string
+    this._username = data.userName as string
   }
 
   public getEmail(): string {
-    return this.email
+    return this._email
   }
 
-  public isConnected() {
-    
+  public getUsername(): string {
+    return this._username
   }
 }
+
+export { ConnectedUser }
