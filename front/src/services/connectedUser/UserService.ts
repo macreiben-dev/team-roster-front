@@ -1,9 +1,8 @@
-import { createCookieRepository } from '@/repositories/cookieRepository'
-import { ConnectedUser } from './ConnectedUser'
-
+import { createCookieRepository, type ICookieRepository } from '@/repositories/cookieRepository'
+import { CurrentUser, NotLoggedInUserInstance } from './ConnectedUser'
 const logContext = { module: 'UserService' }
 
-const getUserInformation = async (): ConnectedUser => {
+const getUserInformation = async (): Promise<CurrentUser> => {
   const apiUrl = import.meta.env.VITE_API_SERVER_URL
   const apiUserMe = import.meta.env.VITE_API_PATH_ME
 
@@ -14,27 +13,34 @@ const getUserInformation = async (): ConnectedUser => {
   console.info('Querying user information', currentContext)
 
   const cookieRepo = createCookieRepository()
-  const requestConfiguraion = {
-    headers: { Authorization: 'Bearer ' + cookieRepo.get('app.at') }
-  }
+
+  const requestConfiguraion = createAuthorizationHeader(cookieRepo)
 
   try {
     const response = await fetch(targetUrl, requestConfiguraion)
 
     if (!response.ok) {
-      throw new Error('Failed to fetch user information')
+      const notOkResponseMessage = 'Failed to fetch user information, API response not OK.'
+      console.error(notOkResponseMessage, { ...currentContext, responseStatus: response.status })
+      throw new Error(notOkResponseMessage)
     }
 
     const data = await response.json()
 
-    const connectedUser: ConnectedUser = new ConnectedUser(data)
+    const connectedUser = new CurrentUser(data)
 
     return connectedUser
   } catch (err) {
     console.error('Failed to fetch user information', { ...currentContext, error: err })
   }
 
-  return new ConnectedUser('not.loggedin@run.local')
+  return NotLoggedInUserInstance
+}
+
+function createAuthorizationHeader(cookieRepo: ICookieRepository) {
+  return {
+    headers: { Authorization: 'Bearer ' + cookieRepo.get('app.at') }
+  }
 }
 
 export { getUserInformation }
