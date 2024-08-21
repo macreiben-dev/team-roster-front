@@ -16,4 +16,5 @@ const createCookieRepository = (): ICookieRepository => {
   return new CookieRepository()
 }
 
-export { createCookieRepository }
+export { createCookieRepository, CookieRepository }
+export type { ICookieRepository }

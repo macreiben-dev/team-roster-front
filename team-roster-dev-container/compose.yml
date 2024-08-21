@@ -6,12 +6,13 @@ services:
       - FUSIONAUTH_PORT=9011
       - FUSIONAUTH_SERVERNAME=localhost
       - FUSIONAUTH_SERVERNAME_FOR_TOKEN=host.docker.internal
-      - CLIENT_ID=e6ba1ed7-e4d0-4b6a-83a5-fff95cc8cf6f
-      - CLIENT_SECRET=-8lBPZnbrkNCUB3yv55jLiYErlNDNbLNoJnJJLPnU1A
+      - CLIENT_ID=1d3c2af4-381a-4c25-b1a7-1d472d411a4d
+      - CLIENT_SECRET=TUCWyrRLUag2oGc4WzB5h5abGJ-E8A9IvLL9d9Hujlw
       - REDIRECT_URI=http://localhost:9001/oauth-callback
       - APPLICATION_ID=e6ba1ed7-e4d0-4b6a-83a5-fff95cc8cf6f
-      - API_KEY=QOWrlYNfOwfIQb5Qfq4OV1PI677INGzGsLN7dgsKrL8
-      - FRONT_APP_ROOT_URL=http://localhost:5174
+      - API_KEY=twhH1MQnhtkmQ3EKxllJqWZy2dnWNGqGrgPd1vutjUC3QjY6a_qrdhr0
+      - FRONT_APP_ROOT_URL=http://localhost:5174/loginin
+      - TENANT_ID=608525b2-902a-0293-d1f5-d34ad233f74a
     ports:
       - 9001:9001
   front:

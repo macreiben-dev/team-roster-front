@@ -1,4 +1,7 @@
-class ConnectedUser {
+const NOT_LOGGEDIN_MAIL = 'user.not.loggedin@mail.local'
+const NOT_LOGGEDIN_USERNAME = 'NotLoggedIn'
+
+class CurrentUser {
   private _email: string
   private _username: string
 
@@ -11,9 +14,18 @@ class ConnectedUser {
     return this._email
   }
 
-  public getUsername(): string {
+  public getUserName(): string {
     return this._username
+  }
+
+  public isLoggedIn(): boolean {
+    return this._email !== 'user.not.loggedin@mail.local' && this._username !== 'NotLoggedIn'
   }
 }
 
-export { ConnectedUser }
+const NotLoggedInUserInstance = new CurrentUser({
+  email: NOT_LOGGEDIN_MAIL,
+  userName: NOT_LOGGEDIN_USERNAME
+})
+
+export { CurrentUser, NotLoggedInUserInstance }
