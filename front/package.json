@@ -7,7 +7,7 @@
     "start:dev": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css & vite  --mode development",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test": "vitest",
     "build-only": "vite build --mode development",
     "build:prod": "vite build --mode production",
     "build:ui:watch": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css --watch",
