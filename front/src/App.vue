@@ -1,5 +1,23 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import { getUserInformation } from './services/connectedUser/UserService'
+import router from './router'
+
+onMounted(async () => {
+  const logContext = {
+    file: 'App.vue',
+    function: 'onMounted'
+  }
+
+  console.log('App.vue mounted', logContext)
+
+  const user = await getUserInformation()
+
+  if (!user.isLoggedIn()) {
+    router.push('/loginin')
+  }
+})
 </script>
 
 <template>
