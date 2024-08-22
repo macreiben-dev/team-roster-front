@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { getUserInformation } from '../repositories/UserLocalRepository'
+import { getUserInformation } from '@/repositories/UserLocalRepository'
 import { useConnectedUserStore } from '@/stores/connectedUserStore'
 import { createCookieRepository } from '@/repositories/cookieRepository'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
@@ -24,7 +24,6 @@ onMounted(async () => {
 
   if (!cookie) {
     redirectoToAuthenticationPage()
-
     return
   }
 
