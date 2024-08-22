@@ -1,8 +1,8 @@
 import { createCookieRepository, type ICookieRepository } from '@/repositories/cookieRepository'
-import { CurrentUser, NotLoggedInUserInstance } from './ConnectedUser'
+import { CurrentUser, NotLoggedInUserInstance } from '../services/connectedUser/ConnectedUser'
 const logContext = { module: 'UserService' }
 
-const getUserInformation = async (parentLogContext?: any): Promise<CurrentUser> => {
+const getUserInformationFromLocalStorage = async (parentLogContext?: any): Promise<CurrentUser> => {
   const apiUrl = import.meta.env.VITE_API_SERVER_URL
   const apiUserMe = import.meta.env.VITE_API_PATH_ME
 
@@ -48,4 +48,4 @@ function createAuthorizationHeader(cookieRepo: ICookieRepository) {
   }
 }
 
-export { getUserInformation }
+export { getUserInformationFromLocalStorage as getUserInformation }

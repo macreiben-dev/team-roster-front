@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { getUserInformation } from '../services/connectedUser/UserService'
+import { getUserInformation } from '../repositories/UserLocalRepository'
 import { useConnectedUserStore } from '@/stores/connectedUserStore'
+import { createCookieRepository } from '@/repositories/cookieRepository'
+import router from '@/router'
 
 onMounted(async () => {
   const logContext = {
@@ -11,11 +13,11 @@ onMounted(async () => {
 
   console.log('Loginin.vue mounted', logContext)
 
-  const user = await getUserInformation()
+  const cookieRepo = createCookieRepository()
 
-  console.log(`is user logged in ? ${user.isLoggedIn()} `, logContext)
+  const cookie = cookieRepo.get('app.at')
 
-  if (!user.isLoggedIn()) {
+  if (!cookie) {
     const logContextNotLoggedId = { ...logContext, apiLoginUrl: import.meta.env.VITE_API_LOGIN_API }
 
     console.info('User is not logged in, redirecting ...', logContextNotLoggedId)
@@ -23,10 +25,27 @@ onMounted(async () => {
     window.location.href = import.meta.env.VITE_API_LOGIN_API
     return
   }
-  const store = useConnectedUserStore()
+
+  const store = useConnectedUserStore() as ReturnType<typeof useConnectedUserStore>
+
+  console.info('Authentication token cookie found.', {
+    ...logContext,
+    currentUsername: store.currentUserName
+  })
+
+  const user = await getUserInformation(logContext)
 
   store.setConnectedUser(user)
+
+  if (store.isLoggedIn === false) {
+    console.info('User not logged in, redirecting to loginin spa page', logContext)
+    router.push('/loginin')
+  }
+
+  router.push('/')
 })
 </script>
 
-<template>Hello from Login in component</template>
+<template>
+  <h1>Login in ...</h1>
+</template>
