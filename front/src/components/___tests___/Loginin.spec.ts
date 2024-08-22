@@ -1,13 +1,13 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
 import LoginIn from '@/components/LoginIn.vue'
 import { describe, expect, it, vi } from 'vitest'
 
 describe('LoginIn.vue', () => {
   it('should work', () => {
-    // const mocked = vi.mock('@/repositories/TenantRepository', () => ({
-    //   redirectToAuthenticationPage: vi.fn()
-    // }))
+    const mocked = vi.doMock('@/repositories/TenantRepository', () => ({
+      redirectoToAuthenticationPage: vi.fn()
+    }))
 
     // const wrapper = shallowMount(LoginIn)
 
