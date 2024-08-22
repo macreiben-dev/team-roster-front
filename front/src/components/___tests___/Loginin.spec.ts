@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils'
 // import { createTestingPinia } from '@pinia/testing'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi, beforeEach } from 'vitest'
 
-import { beforeEach } from 'node:test'
 import LoginIn from '@/components/LoginIn.vue'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 import { createCookieRepository } from '@/repositories/cookieRepository'
@@ -47,7 +46,7 @@ describe('LoginIn.vue', () => {
   it('should present title', async () => {
     mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository(''))
 
-    const wrapper = createWrappedComponent2()
+    const wrapper = mountLoginInWithPinia()
 
     const actual = await wrapper.find('#currentTitle').text()
 
@@ -55,38 +54,28 @@ describe('LoginIn.vue', () => {
   })
 
   it('should call redirect when no cookie token', () => {
-    mockedredirectoToAuthenticationPage.mockClear()
-
     withNoCookieToken()
 
-    const _ = createWrappedComponent2()
+    const _ = mountLoginInWithPinia()
 
     expect(mockedredirectoToAuthenticationPage).toHaveBeenCalled()
   })
 
   it('should not redirect when logged in when logged in', () => {
-    mockedredirectoToAuthenticationPage.mockClear()
-
     withCookieToken()
     withValidLoggedInUserInformation()
 
-    const _ = createWrappedComponent2()
+    const _ = mountLoginInWithPinia()
 
     expect(mockedredirectoToAuthenticationPage).not.toHaveBeenCalled()
   })
 })
 // ======================================================
 
-function createWrappedComponent2() {
-  // const { default: LoginIn } = await import('@/components/LoginIn.vue')
+function mountLoginInWithPinia() {
   return mount(LoginIn, {
     global: {
-      plugins: [
-        createPinia()
-        // createTestingPinia({
-        //   createSpy: vi.fn
-        // })
-      ]
+      plugins: [createPinia()]
     }
   })
 }
