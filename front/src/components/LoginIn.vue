@@ -1,25 +1,64 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { getUserInformation } from '../services/connectedUser/UserService'
+import { getUserInformation } from '@/repositories/UserLocalRepository'
+import { useConnectedUserStore } from '@/stores/connectedUserStore'
+import { createCookieRepository } from '@/repositories/cookieRepository'
+import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
+import router from '@/router'
 
 onMounted(async () => {
+  const store = useConnectedUserStore() as ReturnType<typeof useConnectedUserStore>
+
   const logContext = {
     file: 'App.vue',
     function: 'onMounted'
   }
 
-  console.log('App.vue mounted', logContext)
+  console.log('Loginin.vue mounted', {
+    ...logContext,
+    userName: store.currentUserName,
+    isLoggedin: store.isLoggedIn
+  })
 
-  const user = await getUserInformation()
+  const cookie = createCookieRepository().getToken()
 
-  if (!user.isLoggedIn()) {
-    const logContextNotLoggedId = { ...logContext, apiLoginUrl: import.meta.env.VITE_API_LOGIN_API }
-
-    console.info('User is not logged in, redirecting ...', logContextNotLoggedId)
-
-    window.location.href = import.meta.env.VITE_API_LOGIN_API
+  if (!cookie) {
+    redirectoToAuthenticationPage()
+    return
   }
+
+  console.info('Authentication token cookie found.', {
+    ...logContext,
+    userName: store.currentUserName,
+    isLoggedin: store.isLoggedIn
+  })
+
+  const user = await getUserInformation(logContext)
+
+  console.info('User information retrieved.', {
+    ...logContext,
+    userName: user.getUserName(),
+    email: user.getEmail(),
+    isLoggedin: user.isLoggedIn()
+  })
+
+  store.setConnectedUser(user)
+
+  if (store.isLoggedIn === false) {
+    console.info('User not logged in, redirecting to loginin spa page', logContext)
+    router.push('/loginin')
+  }
+
+  console.info('user logged in.', {
+    ...logContext,
+    userName: store.currentUserName,
+    isLoggedin: store.isLoggedIn
+  })
+
+  router.push('/')
 })
 </script>
 
-<template>Hello from Login in component</template>
+<template>
+  <h1 id="currentTitle">Login in ...</h1>
+</template>
