@@ -11,3 +11,7 @@
 ## Resources
 
 - Vuejs with fusion auth: https://fusionauth.io/blog/securely-implement-oauth-vuejs
+
+### Moching with typescript
+
+- https://medium.com/trendyol-tech/jest-mocking-part-2-module-60b80080d5d9

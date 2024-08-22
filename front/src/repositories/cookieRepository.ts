@@ -1,8 +1,8 @@
 import Cookies from 'universal-cookie'
 
 interface ICookieRepository {
-  get(query: string): string
-  getToken(): string
+  get(query: string): string | null
+  getToken(): string | null
 }
 
 class CookieRepository implements ICookieRepository {
@@ -12,7 +12,7 @@ class CookieRepository implements ICookieRepository {
     return cookies.get(query)
   }
 
-  public getToken(): string {
+  public getToken(): string | null {
     return this.get('app.at')
   }
 }

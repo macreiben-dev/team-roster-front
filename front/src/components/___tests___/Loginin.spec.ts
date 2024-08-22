@@ -1,94 +1,91 @@
 import { mount } from '@vue/test-utils'
-import { createTestingPinia } from '@pinia/testing'
+// import { createTestingPinia } from '@pinia/testing'
 import { describe, expect, it, vi } from 'vitest'
 
-import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
-import { CurrentUser } from '@/services/connectedUser/ConnectedUser'
 import { beforeEach } from 'node:test'
+import LoginIn from '@/components/LoginIn.vue'
+import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
+import { createCookieRepository } from '@/repositories/cookieRepository'
+import { getUserInformation } from '@/repositories/UserLocalRepository'
+
+import FakeCookieRepository from './IFakeCookieRepository'
+import { CurrentUser } from '@/services/connectedUser/ConnectedUser'
+import { createPinia } from 'pinia'
+
+vi.mock('@/repositories/TenantRepository')
+const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
+
+vi.mock('@/repositories/cookieRepository')
+const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
+
+vi.mock('@/repositories/UserLocalRepository')
+const mockedGetUserInformation = vi.mocked(getUserInformation)
+
+// ----------------------------------------------------------------------
+
+const withValidLoggedInUserInformation = () => {
+  const currentUser = new CurrentUser({ email: 'john.test@mail.test', userName: 'John Test' })
+
+  mockedGetUserInformation.mockResolvedValue(currentUser)
+}
+
+const withCookieToken = () => {
+  mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository('some_token_value'))
+}
+
+const withNoCookieToken = () => {
+  mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository(null))
+}
 
 describe('LoginIn.vue', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    vi.resetModules()
+    vi.resetAllMocks()
   })
+
   it('should present title', async () => {
-    vi.doMock('@/repositories/TenantRepository', () => ({
-      redirectoToAuthenticationPage: vi.fn()
-    }))
+    mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository(''))
 
-    vi.doMock('@/repositories/cookieRepository', () => ({
-      createCookieRepository: () => ({
-        getToken: vi.fn().mockReturnValue(null)
-      })
-    }))
+    const wrapper = createWrappedComponent2()
 
-    const wrapper = await createWrappedComponent()
-
-    const actual = wrapper.find('#currentTitle').text()
+    const actual = await wrapper.find('#currentTitle').text()
 
     expect(actual).toBe('Login in ...')
   })
 
-  describe('when not logged in', async () => {
-    it('should call redirect if not logged in', async () => {
-      const mockedRedirectToAuthentication = vi.fn()
+  it('should call redirect when no cookie token', () => {
+    mockedredirectoToAuthenticationPage.mockClear()
 
-      vi.doMock('@/repositories/TenantRepository', () => ({
-        redirectoToAuthenticationPage: mockedRedirectToAuthentication
-      }))
+    withNoCookieToken()
 
-      vi.doMock('@/repositories/cookieRepository', () => ({
-        createCookieRepository: () => ({
-          getToken: vi.fn().mockReturnValue(null)
-        })
-      }))
+    const _ = createWrappedComponent2()
 
-      const _ = await createWrappedComponent()
-
-      expect(mockedRedirectToAuthentication).toHaveBeenCalled()
-    })
-    // -----------------------------------------------------------
+    expect(mockedredirectoToAuthenticationPage).toHaveBeenCalled()
   })
-  // ======================================================
-  describe('when logged in', async () => {
-    it('should not redirect', async () => {
-      const mockedRedirectToAuthentication = vi.fn()
 
-      vi.doMock('@/repositories/TenantRepository', () => ({
-        redirectoToAuthenticationPage: mockedRedirectToAuthentication
-      }))
+  it('should not redirect when logged in when logged in', () => {
+    mockedredirectoToAuthenticationPage.mockClear()
 
-      vi.doMock('@/repositories/cookieRepository', () => ({
-        createCookieRepository: () => ({
-          getToken: vi.fn().mockReturnValue('some_token')
-        })
-      }))
+    withCookieToken()
+    withValidLoggedInUserInformation()
 
-      vi.doMock('@/repositories/UserLocalRepository', () => ({
-        getUserInformation: vi.fn().mockReturnValue(
-          new CurrentUser({
-            userName: 'Testing Username',
-            email: 'testing.username@unittest.local'
-          })
-        )
-      }))
+    const _ = createWrappedComponent2()
 
-      const _ = await createWrappedComponent()
-
-      expect(mockedRedirectToAuthentication).not.toHaveBeenCalled()
-    })
-    // -----------------------------------------------------------
+    expect(mockedredirectoToAuthenticationPage).not.toHaveBeenCalled()
   })
-  // ======================================================
 })
+// ======================================================
 
-async function createWrappedComponent() {
-  const { default: LoginIn } = await import('@/components/LoginIn.vue')
+function createWrappedComponent2() {
+  // const { default: LoginIn } = await import('@/components/LoginIn.vue')
   return mount(LoginIn, {
     global: {
       plugins: [
-        createTestingPinia({
-          createSpy: vi.fn
-        })
+        createPinia()
+        // createTestingPinia({
+        //   createSpy: vi.fn
+        // })
       ]
     }
   })

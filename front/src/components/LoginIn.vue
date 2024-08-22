@@ -35,6 +35,13 @@ onMounted(async () => {
 
   const user = await getUserInformation(logContext)
 
+  console.info('User information retrieved.', {
+    ...logContext,
+    userName: user.getUserName(),
+    email: user.getEmail(),
+    isLoggedin: user.isLoggedIn()
+  })
+
   store.setConnectedUser(user)
 
   if (store.isLoggedIn === false) {
