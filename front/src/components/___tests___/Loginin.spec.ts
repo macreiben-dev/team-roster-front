@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
 import LoginIn from '@/components/LoginIn.vue'
 import { describe, expect, it, vi } from 'vitest'
@@ -11,7 +11,7 @@ describe('LoginIn.vue', () => {
 
     // const wrapper = shallowMount(LoginIn)
 
-    const wrapper = shallowMount(LoginIn, {
+    const wrapper = mount(LoginIn, {
       global: {
         plugins: [
           createTestingPinia({
@@ -21,6 +21,8 @@ describe('LoginIn.vue', () => {
       }
     })
 
-    expect(1).toBe(1)
+    const actual = wrapper.find('#currentTitle').text()
+
+    expect(actual).toBe('Login in ...')
   })
 })

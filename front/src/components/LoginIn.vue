@@ -54,5 +54,5 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1>Login in ...</h1>
+  <h1 id="currentTitle">Login in ...</h1>
 </template>
