@@ -1,7 +1,8 @@
 import Cookies from 'universal-cookie'
 
 interface ICookieRepository {
-  get(query: string): string
+  get(query: string): string | null
+  getToken(): string | null
 }
 
 class CookieRepository implements ICookieRepository {
@@ -10,10 +11,15 @@ class CookieRepository implements ICookieRepository {
 
     return cookies.get(query)
   }
+
+  public getToken(): string | null {
+    return this.get('app.at')
+  }
 }
 
 const createCookieRepository = (): ICookieRepository => {
   return new CookieRepository()
 }
 
-export { createCookieRepository }
+export { createCookieRepository, CookieRepository }
+export type { ICookieRepository }

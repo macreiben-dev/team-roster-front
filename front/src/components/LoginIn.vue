@@ -1,13 +1,64 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { getUserInformation } from '../services/connectedUser/UserService'
+import { getUserInformation } from '@/repositories/UserLocalRepository'
+import { useConnectedUserStore } from '@/stores/connectedUserStore'
+import { createCookieRepository } from '@/repositories/cookieRepository'
+import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
+import router from '@/router'
 
 onMounted(async () => {
-  console.log('LoginIn component mounted')
-  const current = await getUserInformation()
+  const store = useConnectedUserStore() as ReturnType<typeof useConnectedUserStore>
 
-  console.info(current)
+  const logContext = {
+    file: 'App.vue',
+    function: 'onMounted'
+  }
+
+  console.log('Loginin.vue mounted', {
+    ...logContext,
+    userName: store.currentUserName,
+    isLoggedin: store.isLoggedIn
+  })
+
+  const cookie = createCookieRepository().getToken()
+
+  if (!cookie) {
+    redirectoToAuthenticationPage()
+    return
+  }
+
+  console.info('Authentication token cookie found.', {
+    ...logContext,
+    userName: store.currentUserName,
+    isLoggedin: store.isLoggedIn
+  })
+
+  const user = await getUserInformation(logContext)
+
+  console.info('User information retrieved.', {
+    ...logContext,
+    userName: user.getUserName(),
+    email: user.getEmail(),
+    isLoggedin: user.isLoggedIn()
+  })
+
+  store.setConnectedUser(user)
+
+  if (store.isLoggedIn === false) {
+    console.info('User not logged in, redirecting to loginin spa page', logContext)
+    router.push('/loginin')
+  }
+
+  console.info('user logged in.', {
+    ...logContext,
+    userName: store.currentUserName,
+    isLoggedin: store.isLoggedIn
+  })
+
+  router.push('/')
 })
 </script>
 
-<template>Hello from Login in component</template>
+<template>
+  <h1 id="currentTitle">Login in ...</h1>
+</template>

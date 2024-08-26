@@ -1,5 +1,22 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import router from './router'
+import { useConnectedUserStore } from './stores/connectedUserStore'
+
+onMounted(async () => {
+  const store = useConnectedUserStore()
+
+  const logContext = {
+    file: 'App.vue',
+    function: 'onMounted'
+  }
+
+  if (store.isLoggedIn === false) {
+    console.info('User not logged in, redirecting to loginin spa page', logContext)
+    router.push('/loginin')
+  }
+})
 </script>
 
 <template>
