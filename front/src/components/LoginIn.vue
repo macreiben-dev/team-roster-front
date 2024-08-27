@@ -5,7 +5,7 @@ import { useConnectedUserStore } from '@/stores/connectedUserStore'
 import { useTeamRoster } from '@/stores/teamStore'
 
 import { getUserInformation } from '@/repositories/UserLocalRepository'
-import { createCookieRepository } from '@/repositories/CookieRepository'
+import { createCookieRepository } from '@/repositories/cookieRepository'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 
 import router from '@/router'

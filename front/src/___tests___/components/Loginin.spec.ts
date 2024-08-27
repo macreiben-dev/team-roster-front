@@ -4,7 +4,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 
 import LoginIn from '@/components/LoginIn.vue'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
-import { createCookieRepository } from '@/repositories/CookieRepository'
+import { createCookieRepository } from '@/repositories/cookieRepository'
 import { getUserInformation } from '@/repositories/UserLocalRepository'
 import { createTeamsRepository } from '@/repositories/teamsRepository'
 
@@ -18,7 +18,7 @@ import Team from '@/services/models/Team'
 vi.mock('@/repositories/TenantRepository')
 const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
 
-vi.mock('@/repositories/CookieRepository')
+vi.mock('@/repositories/cookieRepository')
 const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 
 vi.mock('@/repositories/UserLocalRepository')

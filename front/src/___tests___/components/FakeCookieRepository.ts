@@ -1,4 +1,4 @@
-import type { ICookieRepository } from '@/repositories/CookieRepository'
+import type { ICookieRepository } from '@/repositories/cookieRepository'
 
 class FakeCookieRepository implements ICookieRepository {
   private token: string | null = ''
