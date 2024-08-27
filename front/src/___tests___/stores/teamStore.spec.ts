@@ -2,7 +2,7 @@ import { createPinia, setActivePinia } from 'pinia'
 import { describe, test, expect } from 'vitest'
 import { useTeamRoster } from '@/stores/teamStore'
 import Team from '@/services/models/Team'
-import { FakeTeams } from './fakes/FakeTeams'
+import { FakeTeams } from '../fakes/FakeTeams'
 
 const pinia = createPinia()
 

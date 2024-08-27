@@ -6,11 +6,14 @@ import LoginIn from '@/components/LoginIn.vue'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 import { createCookieRepository } from '@/repositories/CookieRepository'
 import { getUserInformation } from '@/repositories/UserLocalRepository'
+import { createTeamsRepository } from '@/repositories/teamsRepository'
 
 import FakeCookieRepository from './FakeCookieRepository'
 import { CurrentUser } from '@/services/connectedUser/ConnectedUser'
 import { createPinia } from 'pinia'
 import { useTeamRoster } from '@/stores/teamStore'
+import { FakeTeams } from '../fakes/FakeTeams'
+import Team from '@/services/models/Team'
 
 vi.mock('@/repositories/TenantRepository')
 const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
@@ -20,6 +23,9 @@ const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 
 vi.mock('@/repositories/UserLocalRepository')
 const mockedGetUserInformation = vi.mocked(getUserInformation)
+
+vi.mock('@/repositories/teamsRepository')
+const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +41,12 @@ const withCookieToken = () => {
 
 const withNoCookieToken = () => {
   mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository(null))
+}
+
+const fakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
+
+const withOneTeamFromApi = () => {
+  mockedCreateTeamsRepository.mockReturnValue(new FakeTeams(fakeTeams))
 }
 
 describe('LoginIn.vue', () => {
@@ -74,10 +86,13 @@ describe('LoginIn.vue', () => {
   it('should load teams when user logged in', () => {
     withCookieToken()
     withValidLoggedInUserInformation()
+    withOneTeamFromApi()
 
-    const _ = mountLoginInWithPinia()
+    const component = mountLoginInWithPinia()
 
-    const actual = useTeamRoster().allTeams
+    const store = useTeamRoster()
+
+    const actual = store.allTeams
   })
 })
 // ======================================================

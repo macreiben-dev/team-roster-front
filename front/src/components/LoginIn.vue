@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { getUserInformation } from '@/repositories/UserLocalRepository'
+
 import { useConnectedUserStore } from '@/stores/connectedUserStore'
+import { useTeamRoster } from '@/stores/teamStore'
+
+import { getUserInformation } from '@/repositories/UserLocalRepository'
 import { createCookieRepository } from '@/repositories/CookieRepository'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
+
 import router from '@/router'
 import type { CurrentUser } from '@/services/connectedUser/ConnectedUser'
+import { createTeamsRepository } from '@/repositories/teamsRepository'
 
 const logContext = {
   file: 'App.vue',
@@ -42,6 +47,10 @@ onMounted(async () => {
   /**
    * TODO this is here that we'll load the teams.
    */
+
+  const teamRosterStore = useTeamRoster()
+
+  teamRosterStore.initialize(createTeamsRepository())
 
   router.push('/')
 })

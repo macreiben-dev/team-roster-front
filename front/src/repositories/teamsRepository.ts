@@ -7,8 +7,8 @@ class TeamsApiRepository implements ITeams {
   }
 }
 
-function createTeamsApiRepository(): ITeams {
+function createTeamsRepository(): ITeams {
   return new TeamsApiRepository()
 }
 
-export { createTeamsApiRepository }
+export { createTeamsRepository }
