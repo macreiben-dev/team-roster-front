@@ -18,7 +18,7 @@ import Team from '@/services/models/Team'
 vi.mock('@/repositories/TenantRepository')
 const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
 
-vi.mock('@/repositories/cookieRepository')
+vi.mock('@/repositories/CookieRepository')
 const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 
 vi.mock('@/repositories/UserLocalRepository')
