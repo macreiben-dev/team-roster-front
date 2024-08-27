@@ -1,4 +1,4 @@
-import { createCookieRepository, type ICookieRepository } from '@/repositories/cookieRepository'
+import { createCookieRepository, type ICookieRepository } from '@/repositories/CookieRepository'
 import { CurrentUser, NotLoggedInUserInstance } from '../services/connectedUser/ConnectedUser'
 const logContext = { module: 'UserService' }
 

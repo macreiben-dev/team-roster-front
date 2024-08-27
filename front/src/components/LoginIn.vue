@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { getUserInformation } from '@/repositories/UserLocalRepository'
 import { useConnectedUserStore } from '@/stores/connectedUserStore'
-import { createCookieRepository } from '@/repositories/cookieRepository'
+import { createCookieRepository } from '@/repositories/CookieRepository'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 import router from '@/router'
 import type { CurrentUser } from '@/services/connectedUser/ConnectedUser'

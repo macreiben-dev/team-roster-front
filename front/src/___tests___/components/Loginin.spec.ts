@@ -4,10 +4,10 @@ import { describe, expect, it, vi, beforeEach } from 'vitest'
 
 import LoginIn from '@/components/LoginIn.vue'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
-import { createCookieRepository } from '@/repositories/cookieRepository'
+import { createCookieRepository } from '@/repositories/CookieRepository'
 import { getUserInformation } from '@/repositories/UserLocalRepository'
 
-import FakeCookieRepository from './IFakeCookieRepository'
+import FakeCookieRepository from './FakeCookieRepository'
 import { CurrentUser } from '@/services/connectedUser/ConnectedUser'
 import { createPinia } from 'pinia'
 import { useTeamRoster } from '@/stores/teamStore'
