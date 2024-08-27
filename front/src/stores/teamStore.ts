@@ -13,16 +13,13 @@ export const useTeamRoster = defineStore('team-roster', {
     initialize(teamCollection: ITeams) {
       clear(this.team as [])
 
+      teamCollection = teamCollection as ITeams
+
       const teams = teamCollection.all()
 
       for (const element of teams) {
         this.team.push(element)
       }
-
-      // teams.forEach((element) => {
-      //   //this.team.push(element)
-      //   this.$patch({ team: [...this.team, element] })
-      // })
     }
   }
 })

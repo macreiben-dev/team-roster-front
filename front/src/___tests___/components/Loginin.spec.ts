@@ -90,6 +90,8 @@ describe('LoginIn.vue', () => {
 
     const component = mountLoginInWithPinia()
 
+    const _ = component.find('#currentTitle')
+
     const store = useTeamRoster()
 
     const actual = store.allTeams

@@ -50,7 +50,9 @@ onMounted(async () => {
 
   const teamRosterStore = useTeamRoster()
 
-  teamRosterStore.initialize(createTeamsRepository())
+  const teamRepository = createTeamsRepository()
+
+  teamRosterStore.initialize(teamRepository)
 
   router.push('/')
 })
