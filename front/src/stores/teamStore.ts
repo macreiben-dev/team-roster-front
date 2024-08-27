@@ -11,7 +11,7 @@ export const useTeamRoster = defineStore('team-roster', {
   },
   actions: {
     initialize(teamCollection: ITeams) {
-      this.team.splice(0)
+      clear(this.team as [])
 
       const teams = teamCollection.all()
 
@@ -21,3 +21,7 @@ export const useTeamRoster = defineStore('team-roster', {
     }
   }
 })
+
+const clear = (source: []) => {
+  source.splice(0)
+}
