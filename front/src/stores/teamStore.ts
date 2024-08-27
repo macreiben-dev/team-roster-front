@@ -1,22 +1,23 @@
 import Team from '@/services/models/Team'
 import { defineStore } from 'pinia'
+import type { ITeams } from '@/stores/contractTeamStore'
 
-defineStore('team-roster', () => {
-  /**
-   * Idea: use a typescript type for store that could be a root aggregate.
-   */
-  const state = {
+export const useTeamRoster = defineStore('team-roster', {
+  state: () => ({
     team: [] as Team[]
-  }
-  const getters = {
-    allTeams(state: any) {
-      return state.team.map((team: Team) => team.asJson())
+  }),
+  getters: {
+    allTeams: (state) => state.team.map((team: Team) => team.asJson())
+  },
+  actions: {
+    initialize(teamCollection: ITeams) {
+      this.team.splice(0)
+
+      const teams = teamCollection.all()
+
+      teams.forEach((element) => {
+        this.team.push(element)
+      })
     }
   }
-  const actions = {
-    initialize(state: any) {
-      state.team = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
-    }
-  }
-  return { state, getters, actions }
 })
