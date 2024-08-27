@@ -10,6 +10,7 @@ import { getUserInformation } from '@/repositories/UserLocalRepository'
 import FakeCookieRepository from './IFakeCookieRepository'
 import { CurrentUser } from '@/services/connectedUser/ConnectedUser'
 import { createPinia } from 'pinia'
+import { useTeamRoster } from '@/stores/teamStore'
 
 vi.mock('@/repositories/TenantRepository')
 const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
@@ -61,13 +62,22 @@ describe('LoginIn.vue', () => {
     expect(mockedredirectoToAuthenticationPage).toHaveBeenCalled()
   })
 
-  it('should not redirect when logged in when logged in', () => {
+  it('should not redirect when logged in', () => {
     withCookieToken()
     withValidLoggedInUserInformation()
 
     const _ = mountLoginInWithPinia()
 
     expect(mockedredirectoToAuthenticationPage).not.toHaveBeenCalled()
+  })
+
+  it('should load teams when user logged in', () => {
+    withCookieToken()
+    withValidLoggedInUserInformation()
+
+    const _ = mountLoginInWithPinia()
+
+    const actual = useTeamRoster().allTeams
   })
 })
 // ======================================================

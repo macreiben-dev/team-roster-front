@@ -5,20 +5,17 @@ import { useConnectedUserStore } from '@/stores/connectedUserStore'
 import { createCookieRepository } from '@/repositories/cookieRepository'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 import router from '@/router'
+import type { CurrentUser } from '@/services/connectedUser/ConnectedUser'
+
+const logContext = {
+  file: 'App.vue',
+  function: 'onMounted'
+}
 
 onMounted(async () => {
-  const store = useConnectedUserStore() as ReturnType<typeof useConnectedUserStore>
+  const connectedUserStore = useConnectedUserStore() as ReturnType<typeof useConnectedUserStore>
 
-  const logContext = {
-    file: 'App.vue',
-    function: 'onMounted'
-  }
-
-  console.log('Loginin.vue mounted', {
-    ...logContext,
-    userName: store.currentUserName,
-    isLoggedin: store.isLoggedIn
-  })
+  console.log('Loginin.vue mounted', snapShotConnectedUserStore)
 
   const cookie = createCookieRepository().getToken()
 
@@ -27,36 +24,46 @@ onMounted(async () => {
     return
   }
 
-  console.info('Authentication token cookie found.', {
-    ...logContext,
-    userName: store.currentUserName,
-    isLoggedin: store.isLoggedIn
-  })
+  console.info('Authentication token cookie found.', snapShotConnectedUserStore)
 
   const user = await getUserInformation(logContext)
 
-  console.info('User information retrieved.', {
-    ...logContext,
-    userName: user.getUserName(),
-    email: user.getEmail(),
-    isLoggedin: user.isLoggedIn()
-  })
+  console.info('User information retrieved.', snapshotUserInfoRetrieved(user))
 
-  store.setConnectedUser(user)
+  connectedUserStore.setConnectedUser(user)
 
-  if (store.isLoggedIn === false) {
+  if (connectedUserStore.isLoggedIn === false) {
     console.info('User not logged in, redirecting to loginin spa page', logContext)
     router.push('/loginin')
   }
 
-  console.info('user logged in.', {
-    ...logContext,
-    userName: store.currentUserName,
-    isLoggedin: store.isLoggedIn
-  })
+  console.info('user logged in.', snapShotConnectedUserStore(connectedUserStore))
+
+  /**
+   * TODO this is here that we'll load the teams.
+   */
 
   router.push('/')
 })
+
+const snapShotConnectedUserStore = (
+  connectedUserStore: ReturnType<typeof useConnectedUserStore>
+) => {
+  return {
+    ...logContext,
+    userName: connectedUserStore.currentUserName,
+    isLoggedin: connectedUserStore.isLoggedIn
+  }
+}
+
+const snapshotUserInfoRetrieved = (user: CurrentUser) => {
+  return {
+    ...logContext,
+    userName: user.getUserName(),
+    email: user.getEmail(),
+    isLoggedin: user.isLoggedIn()
+  }
+}
 </script>
 
 <template>
