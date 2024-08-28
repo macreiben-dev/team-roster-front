@@ -7,7 +7,7 @@ export class FakeTeams implements ITeams {
     this.data = data
   }
 
-  all(): Team[] {
+  public all(): Team[] {
     return this.data
   }
 }

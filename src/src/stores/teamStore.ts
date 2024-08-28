@@ -1,6 +1,8 @@
 import Team from '@/services/models/Team'
 import { defineStore } from 'pinia'
-import type { ITeams } from '@/stores/contractTeamStore'
+import { createTeamsRepository } from '@/repositories/TeamsRepository'
+import type { ITeams } from './contractTeamStore'
+import { FakeTeams } from '@/___tests___/fakes/FakeTeams'
 
 export const useTeamRoster = defineStore('team-roster', {
   state: () => ({
@@ -10,10 +12,27 @@ export const useTeamRoster = defineStore('team-roster', {
     allTeams: (state) => state.team.map((team: Team) => team.asJson())
   },
   actions: {
-    initialize(teamCollection: ITeams) {
+    initialize() {
       clear(this.team as [])
 
-      teamCollection = teamCollection as ITeams
+      const teamCollection = createTeamsRepository() as FakeTeams
+
+      console.info(
+        ' | teamcollection',
+        teamCollection,
+        ' | type FakeTeams ?',
+        teamCollection instanceof FakeTeams
+      )
+
+      console.info(
+        ' | teamcollection',
+        teamCollection,
+        ' | type FakeTeals ?',
+        teamCollection instanceof FakeTeams,
+        ' | all function ?',
+        teamCollection.all,
+        ' | '
+      )
 
       const teams = teamCollection.all()
 

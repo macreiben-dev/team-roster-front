@@ -2,12 +2,12 @@ import type Team from '@/services/models/Team'
 import type { ITeams } from '@/stores/contractTeamStore'
 
 class TeamsApiRepository implements ITeams {
-  all(): Team[] {
+  public all(): Team[] {
     return []
   }
 }
 
-function createTeamsRepository(): ITeams {
+function createTeamsRepository(): any {
   return new TeamsApiRepository()
 }
 

@@ -1,8 +1,13 @@
 import { createPinia, setActivePinia } from 'pinia'
-import { describe, test, expect } from 'vitest'
+import { describe, test, expect, vi } from 'vitest'
 import { useTeamRoster } from '@/stores/teamStore'
 import Team from '@/services/models/Team'
 import { FakeTeams } from '../fakes/FakeTeams'
+import { createTeamsRepository } from '@/repositories/teamsRepository'
+import type { ITeams } from '@/stores/contractTeamStore'
+
+vi.mock('@/repositories/teamsRepository')
+const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
 
 const pinia = createPinia()
 
@@ -24,10 +29,12 @@ describe('teamStore', () => {
 
       const fakeTeams = new FakeTeams(original)
 
+      mockedCreateTeamsRepository.mockImplementation(() => fakeTeams)
+
       // ACT
       const store = createStore()
 
-      store.initialize(fakeTeams)
+      store.initialize()
 
       // ASSERT
       expect(store.allTeams).toHaveLength(3)
