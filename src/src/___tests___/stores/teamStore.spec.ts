@@ -6,8 +6,13 @@ import { FakeTeams } from '../fakes/FakeTeams'
 import { createTeamsRepository } from '@/repositories/TeamsRepository'
 // import type { ITeams } from '@/stores/contractTeamStore'
 
-vi.mock('@/repositories/TeamsRepository')
-const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
+// vi.mock('@/repositories/TeamsRepository')
+// const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
+
+vi.mock('@/repositories/TeamsRepository', () => ({
+  createTeamsRepository: () =>
+    new FakeTeams([new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')])
+}))
 
 const pinia = createPinia()
 
@@ -29,7 +34,7 @@ describe('teamStore', () => {
 
       const fakeTeams = new FakeTeams(original)
 
-      mockedCreateTeamsRepository.mockImplementation(() => fakeTeams)
+      // mockedCreateTeamsRepository.mockImplementation(() => fakeTeams)
 
       // ACT
       const store = createStore()
