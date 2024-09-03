@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start:dev": "npx tailwindcss -i ./src/assets/main.css -o ./src/assets/output.css & vite  --mode development",
+    "start:dev": "vite  --mode development",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test": "vitest",

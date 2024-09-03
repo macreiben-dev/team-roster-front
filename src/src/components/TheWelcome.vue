@@ -5,5 +5,12 @@ const store = useConnectedUserStore()
 </script>
 
 <template>
-  <h1>Hello {{ store.currentUserName }}</h1>
+  <div>
+    <div>
+      <h1>Hello {{ store.currentUserName }}</h1>
+    </div>
+    <div class="action-button">
+      <RouterLink to="/teams/create">CreateTeam</RouterLink>
+    </div>
+  </div>
 </template>

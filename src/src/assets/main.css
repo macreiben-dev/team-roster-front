@@ -5,3 +5,7 @@
 h1 {
   @apply text-2xl;
 }
+
+.action-button {
+  @apply text-center px-1 py-2 ring ring-gray-dark rounded-sm;
+}
