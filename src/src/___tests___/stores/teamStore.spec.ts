@@ -3,7 +3,8 @@ import { describe, test, expect, vi } from 'vitest'
 import { useTeamRoster } from '@/stores/teamStore'
 import Team from '@/services/models/Team'
 import { FakeTeams } from '../fakes/FakeTeams'
-import { createTeamsRepository } from '@/repositories/TeamsRepository'
+// import { createTeamsRepository } from '@/repositories/TeamsRepository'
+import type { ITeams } from '@/stores/contractTeamStore'
 // import type { ITeams } from '@/stores/contractTeamStore'
 
 // vi.mock('@/repositories/TeamsRepository')
@@ -14,7 +15,7 @@ const allFakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 
 const currentFakeTeams = new FakeTeams(allFakeTeams)
 
 vi.mock('@/repositories/TeamsRepository', () => ({
-  createTeamsRepository: () => currentFakeTeams
+  createTeamsRepository: (): ITeams => currentFakeTeams
 }))
 
 const pinia = createPinia()
@@ -35,9 +36,9 @@ describe('teamStore', () => {
     test('should initialize the store', () => {
       // mockedCreateTeamsRepository.mockImplementation(() => fakeTeams)
 
-      const temp = createTeamsRepository()
+      // const temp = createTeamsRepository()
 
-      console.info('temp all', temp.all())
+      // console.info('temp all test', temp)
 
       // ACT
       const store = createStore()

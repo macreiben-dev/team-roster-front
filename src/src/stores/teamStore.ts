@@ -1,8 +1,6 @@
 import Team from '@/services/models/Team'
 import { defineStore } from 'pinia'
 import { createTeamsRepository } from '@/repositories/TeamsRepository'
-import type { ITeams } from './contractTeamStore'
-import { FakeTeams } from '@/___tests___/fakes/FakeTeams'
 
 export const useTeamRoster = defineStore('team-roster', {
   state: () => ({
@@ -15,7 +13,9 @@ export const useTeamRoster = defineStore('team-roster', {
     initialize() {
       clear(this.team as [])
 
-      const teamCollection = createTeamsRepository() as FakeTeams
+      const teamCollection = createTeamsRepository()
+
+      console.info('teamCollection test2', teamCollection)
 
       const teams = teamCollection.all()
 
