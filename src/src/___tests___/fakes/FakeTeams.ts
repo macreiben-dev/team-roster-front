@@ -10,4 +10,12 @@ export class FakeTeams implements ITeams {
   public all(): Team[] {
     return this.data
   }
+
+  public setAll(teams: Team[]): void {
+    this.data = teams
+  }
+
+  public clear(): void {
+    this.data.splice(0)
+  }
 }

@@ -25,9 +25,9 @@ const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 vi.mock('@/repositories/UserLocalRepository')
 const mockedGetUserInformation = vi.mocked(getUserInformation)
 
-const allFakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
+const team01 = new Team(1, 'Team 1')
 
-const currentFakeTeams = new FakeTeams(allFakeTeams)
+const currentFakeTeams = new FakeTeams([])
 
 vi.mock('@/repositories/TeamsRepository', () => ({
   createTeamsRepository: (): ITeams => currentFakeTeams
@@ -51,18 +51,16 @@ const withNoCookieToken = () => {
 
 // const fakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
 
-// const withOneTeamFromApi = () => {
-//   mockedCreateTeamsRepository.mockReturnValue(new FakeTeams(fakeTeams))
-// }
+const withOneTeamFromApi = () => {
+  currentFakeTeams.setAll([team01])
+}
 
 describe('LoginIn.vue', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     vi.resetModules()
     vi.resetAllMocks()
-    /**
-     * idea: add a clear on fakeTeams implementation so builder can still work.
-     */
+    currentFakeTeams.clear()
   })
 
   it('should present title', async () => {
@@ -95,7 +93,7 @@ describe('LoginIn.vue', () => {
   it('should load teams when user logged in', () => {
     withCookieToken()
     withValidLoggedInUserInformation()
-    // withOneTeamFromApi()
+    withOneTeamFromApi()
 
     const component = mountLoginInWithPinia()
 
