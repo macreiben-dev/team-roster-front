@@ -14,6 +14,7 @@ import { createPinia } from 'pinia'
 import { useTeamRoster } from '@/stores/teamStore'
 import { FakeTeams } from '../fakes/FakeTeams'
 import Team from '@/services/models/Team'
+import type { ITeams } from '@/stores/contractTeamStore'
 
 vi.mock('@/repositories/TenantRepository')
 const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
@@ -24,8 +25,13 @@ const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 vi.mock('@/repositories/UserLocalRepository')
 const mockedGetUserInformation = vi.mocked(getUserInformation)
 
-vi.mock('@/repositories/TeamsRepository')
-const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
+const allFakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
+
+const currentFakeTeams = new FakeTeams(allFakeTeams)
+
+vi.mock('@/repositories/TeamsRepository', () => ({
+  createTeamsRepository: (): ITeams => currentFakeTeams
+}))
 
 // ----------------------------------------------------------------------
 
@@ -43,11 +49,11 @@ const withNoCookieToken = () => {
   mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository(null))
 }
 
-const fakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
+// const fakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
 
-const withOneTeamFromApi = () => {
-  mockedCreateTeamsRepository.mockReturnValue(new FakeTeams(fakeTeams))
-}
+// const withOneTeamFromApi = () => {
+//   mockedCreateTeamsRepository.mockReturnValue(new FakeTeams(fakeTeams))
+// }
 
 describe('LoginIn.vue', () => {
   beforeEach(() => {
@@ -86,7 +92,7 @@ describe('LoginIn.vue', () => {
   it('should load teams when user logged in', () => {
     withCookieToken()
     withValidLoggedInUserInformation()
-    withOneTeamFromApi()
+    // withOneTeamFromApi()
 
     const component = mountLoginInWithPinia()
 
