@@ -17,23 +17,6 @@ export const useTeamRoster = defineStore('team-roster', {
 
       const teamCollection = createTeamsRepository() as FakeTeams
 
-      console.info(
-        ' | teamcollection',
-        teamCollection,
-        ' | type FakeTeams ?',
-        teamCollection instanceof FakeTeams
-      )
-
-      console.info(
-        ' | teamcollection',
-        teamCollection,
-        ' | type FakeTeals ?',
-        teamCollection instanceof FakeTeams,
-        ' | all function ?',
-        teamCollection.all,
-        ' | '
-      )
-
       const teams = teamCollection.all()
 
       for (const element of teams) {

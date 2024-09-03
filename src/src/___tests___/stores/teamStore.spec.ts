@@ -9,9 +9,12 @@ import { createTeamsRepository } from '@/repositories/TeamsRepository'
 // vi.mock('@/repositories/TeamsRepository')
 // const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
 
+const allFakeTeams = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
+
+const currentFakeTeams = new FakeTeams(allFakeTeams)
+
 vi.mock('@/repositories/TeamsRepository', () => ({
-  createTeamsRepository: () =>
-    new FakeTeams([new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')])
+  createTeamsRepository: () => currentFakeTeams
 }))
 
 const pinia = createPinia()
@@ -30,11 +33,11 @@ describe('teamStore', () => {
     })
 
     test('should initialize the store', () => {
-      const original = [new Team(1, 'Team 1'), new Team(2, 'Team 2'), new Team(3, 'Team 3')]
-
-      const fakeTeams = new FakeTeams(original)
-
       // mockedCreateTeamsRepository.mockImplementation(() => fakeTeams)
+
+      const temp = createTeamsRepository()
+
+      console.info('temp all', temp.all())
 
       // ACT
       const store = createStore()
