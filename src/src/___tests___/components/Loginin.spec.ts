@@ -24,7 +24,7 @@ const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 vi.mock('@/repositories/UserLocalRepository')
 const mockedGetUserInformation = vi.mocked(getUserInformation)
 
-vi.mock('@/repositories/teamsRepository')
+vi.mock('@/repositories/TeamsRepository')
 const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
 
 // ----------------------------------------------------------------------
