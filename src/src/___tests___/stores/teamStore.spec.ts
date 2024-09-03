@@ -6,7 +6,7 @@ import { FakeTeams } from '../fakes/FakeTeams'
 import { createTeamsRepository } from '@/repositories/TeamsRepository'
 // import type { ITeams } from '@/stores/contractTeamStore'
 
-vi.mock('@/repositories/teamsRepository')
+vi.mock('@/repositories/TeamsRepository')
 const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
 
 const pinia = createPinia()
