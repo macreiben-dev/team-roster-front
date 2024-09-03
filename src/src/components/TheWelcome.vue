@@ -9,7 +9,7 @@ const store = useConnectedUserStore()
     <div>
       <h1>Hello {{ store.currentUserName }}</h1>
     </div>
-    <div class="action-button">
+    <div class="action-button action-button-padded">
       <RouterLink to="/teams/create">CreateTeam</RouterLink>
     </div>
   </div>
