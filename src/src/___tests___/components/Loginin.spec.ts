@@ -60,6 +60,9 @@ describe('LoginIn.vue', () => {
     vi.clearAllMocks()
     vi.resetModules()
     vi.resetAllMocks()
+    /**
+     * idea: add a clear on fakeTeams implementation so builder can still work.
+     */
   })
 
   it('should present title', async () => {
