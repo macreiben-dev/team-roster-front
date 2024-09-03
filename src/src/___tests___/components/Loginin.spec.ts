@@ -6,7 +6,7 @@ import LoginIn from '@/components/LoginIn.vue'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 import { createCookieRepository } from '@/repositories/cookieRepository'
 import { getUserInformation } from '@/repositories/UserLocalRepository'
-import { createTeamsRepository } from '@/repositories/teamsRepository'
+import { createTeamsRepository } from '@/repositories/TeamsRepository'
 
 import FakeCookieRepository from './FakeCookieRepository'
 import { CurrentUser } from '@/services/connectedUser/ConnectedUser'

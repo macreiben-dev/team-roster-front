@@ -10,7 +10,7 @@ import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 
 import router from '@/router'
 import type { CurrentUser } from '@/services/connectedUser/ConnectedUser'
-import { createTeamsRepository } from '@/repositories/teamsRepository'
+import { createTeamsRepository } from '@/repositories/TeamsRepository'
 
 const logContext = {
   file: 'App.vue',

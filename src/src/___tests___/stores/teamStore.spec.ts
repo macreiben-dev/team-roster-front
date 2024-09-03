@@ -3,8 +3,8 @@ import { describe, test, expect, vi } from 'vitest'
 import { useTeamRoster } from '@/stores/teamStore'
 import Team from '@/services/models/Team'
 import { FakeTeams } from '../fakes/FakeTeams'
-import { createTeamsRepository } from '@/repositories/teamsRepository'
-import type { ITeams } from '@/stores/contractTeamStore'
+import { createTeamsRepository } from '@/repositories/TeamsRepository'
+// import type { ITeams } from '@/stores/contractTeamStore'
 
 vi.mock('@/repositories/teamsRepository')
 const mockedCreateTeamsRepository = vi.mocked(createTeamsRepository)
