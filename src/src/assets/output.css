@@ -22,8 +22,16 @@
   width: 33.333333%;
 }
 
+.basis-1\/2{
+  flex-basis: 50%;
+}
+
 .cursor-pointer{
   cursor: pointer;
+}
+
+.flex-row{
+  flex-direction: row;
 }
 
 .justify-end{
