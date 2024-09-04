@@ -616,8 +616,8 @@ video {
 
   .action-button{
     border-radius: 0.125rem;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     text-align: center;
@@ -626,6 +626,16 @@ video {
     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(39 52 68 / var(--tw-ring-opacity));
+  }
+
+  .action-button:hover{
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(126 91 239 / var(--tw-ring-opacity));
+  }
+
+  .action-button:active{
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(255 120 73 / var(--tw-ring-opacity));
   }
 }
 

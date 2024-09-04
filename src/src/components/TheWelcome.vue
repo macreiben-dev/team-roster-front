@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import router from '@/router'
 import { useConnectedUserStore } from '@/stores/connectedUserStore'
 
 const store = useConnectedUserStore()
+
+function toCreateTeam() {
+  router.push('/teams/create')
+}
 </script>
 
 <template>
@@ -9,8 +14,13 @@ const store = useConnectedUserStore()
     <div>
       <h1>Hello {{ store.currentUserName }}</h1>
     </div>
-    <div class="action-button action-button-padded">
-      <RouterLink to="/teams/create">CreateTeam</RouterLink>
+    <div>
+      <button class="action-button action-button-padded" @click="toCreateTeam">
+        Create Team ...
+      </button>
     </div>
+    <!-- <div class="action-button">
+      <RouterLink to="/teams/create">CreateTeam</RouterLink>
+    </div> -->
   </div>
 </template>
