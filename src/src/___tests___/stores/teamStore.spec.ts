@@ -18,6 +18,7 @@ const pinia = createPinia()
 function createStore() {
   setActivePinia(pinia)
   const store = useTeamRoster(pinia)
+  store.clear()
   return store
 }
 describe('teamStore', () => {

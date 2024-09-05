@@ -1,16 +1,16 @@
 import { mount } from '@vue/test-utils'
 // import { createTestingPinia } from '@pinia/testing'
 import { describe, expect, it, vi, beforeEach } from 'vitest'
+import { createPinia } from 'pinia'
 
 import LoginIn from '@/components/LoginIn.vue'
 import { redirectoToAuthenticationPage } from '@/repositories/TenantRepository'
 import { createCookieRepository } from '@/repositories/cookieRepository'
 import { getUserInformation } from '@/repositories/UserLocalRepository'
-import { createTeamsRepository } from '@/repositories/TeamsRepository'
-
 import FakeCookieRepository from './FakeCookieRepository'
+
 import { CurrentUser } from '@/services/connectedUser/ConnectedUser'
-import { createPinia } from 'pinia'
+
 import { useTeamRoster } from '@/stores/teamStore'
 import { FakeTeams } from '../fakes/FakeTeams'
 import Team from '@/services/models/Team'

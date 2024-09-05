@@ -10,6 +10,9 @@ export const useTeamRoster = defineStore('team-roster', {
     allTeams: (state) => state.team.map((team: Team) => team.asJson())
   },
   actions: {
+    clear() {
+      clear(this.team as [])
+    },
     initialize() {
       clear(this.team as [])
 
