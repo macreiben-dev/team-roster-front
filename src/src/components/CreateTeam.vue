@@ -12,23 +12,23 @@ function executeCreateTeam(event: Event) {
 </script>
 
 <template>
-  <div>
-    <h1>Create Team ...</h1>
-  </div>
-  <form @submit="executeCreateTeam">
-    <div class="flex flex-row">
-      <div>
+  <div class="flex flex-col">
+    <div>
+      <h1>Create Team ...</h1>
+    </div>
+    <form @submit="executeCreateTeam">
+      <div class="one-row">
         <label for="teamName">Team Name:</label>
         <input type="text" id="teamName" v-model="teamName" />
       </div>
 
-      <div>
+      <div class="one-row">
         <label for="teamDescription">Team Description:</label>
         <input type="text" id="teamDescription" v-model="teamDescription" />
       </div>
       <div>
-        <button type="submit" class="action-button">Create Team</button>
+        <button class="action-button" @click="executeCreateTeam">Create Team</button>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
