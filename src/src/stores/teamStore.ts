@@ -22,6 +22,16 @@ export const useTeamRoster = defineStore('team-roster', {
       for (const element of teams) {
         this.team.push(element)
       }
+    },
+    createTeam(name: string, description: string) {
+      const currentLoggingContext = {
+        name: name,
+        description: description
+      }
+
+      console.info('Adding team to store', currentLoggingContext)
+
+      this.team.push(new Team(0, name))
     }
   }
 })

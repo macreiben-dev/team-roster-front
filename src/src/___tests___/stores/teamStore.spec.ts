@@ -38,4 +38,18 @@ describe('teamStore', () => {
       expect(store.allTeams).toHaveLength(3)
     })
   })
+  describe('when created', () => {
+    test('should add a team to the store', () => {
+      // ARRANGE
+      const store = createStore()
+
+      // ACT
+      store.createTeam('Team 4', 'Team 4 description')
+
+      const actual = store.allTeams[0]
+
+      // ASSERT
+      expect(actual.name).toBe('Team 4')
+    })
+  })
 })

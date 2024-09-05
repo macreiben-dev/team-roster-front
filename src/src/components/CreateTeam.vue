@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import { useTeamRoster } from '@/stores/teamStore'
+
+const store = useTeamRoster()
 const teamName = ref('')
 const teamDescription = ref('')
 
@@ -8,6 +11,8 @@ function executeCreateTeam(event: Event) {
   event.preventDefault()
   console.log('Creating team ...')
   console.log('teamName:', teamName.value)
+
+  store.createTeam(teamName.value, teamDescription.value)
 }
 </script>
 
