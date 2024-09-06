@@ -19,7 +19,7 @@ function executeCreateTeam(event: Event) {
 <template>
   <div class="flex flex-col">
     <div>
-      <h1>Create Team ...</h1>
+      <h1 id="currentTitle">Create Team ...</h1>
     </div>
     <form @submit="executeCreateTeam">
       <div class="one-row">

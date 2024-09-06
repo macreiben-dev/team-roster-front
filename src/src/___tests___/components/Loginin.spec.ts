@@ -66,7 +66,7 @@ describe('LoginIn.vue', () => {
   it('should present title', async () => {
     mockedCreateCookieRepository.mockReturnValue(new FakeCookieRepository(''))
 
-    const wrapper = mountLoginInWithPinia()
+    const wrapper = mountComponentWithPinia()
 
     const actual = await wrapper.find('#currentTitle').text()
 
@@ -76,7 +76,7 @@ describe('LoginIn.vue', () => {
   it('should call redirect when no cookie token', () => {
     withNoCookieToken()
 
-    const _ = mountLoginInWithPinia()
+    const _ = mountComponentWithPinia()
 
     expect(mockedredirectoToAuthenticationPage).toHaveBeenCalled()
   })
@@ -85,7 +85,7 @@ describe('LoginIn.vue', () => {
     withCookieToken()
     withValidLoggedInUserInformation()
 
-    const _ = mountLoginInWithPinia()
+    const _ = mountComponentWithPinia()
 
     expect(mockedredirectoToAuthenticationPage).not.toHaveBeenCalled()
   })
@@ -95,7 +95,7 @@ describe('LoginIn.vue', () => {
     withValidLoggedInUserInformation()
     withOneTeamFromApi()
 
-    const component = mountLoginInWithPinia()
+    const component = mountComponentWithPinia()
 
     const _ = component.find('#currentTitle')
 
@@ -106,7 +106,7 @@ describe('LoginIn.vue', () => {
 })
 // ======================================================
 
-function mountLoginInWithPinia() {
+function mountComponentWithPinia() {
   return mount(LoginIn, {
     global: {
       plugins: [createPinia()]
