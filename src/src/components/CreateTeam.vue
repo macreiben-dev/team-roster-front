@@ -32,7 +32,9 @@ function executeCreateTeam(event: Event) {
         <input type="text" id="teamDescription" v-model="teamDescription" />
       </div>
       <div>
-        <button class="action-button" @click="executeCreateTeam">Create Team</button>
+        <button id="executeButton" class="action-button" @click="executeCreateTeam">
+          Create Team
+        </button>
       </div>
     </form>
   </div>

@@ -11,7 +11,7 @@ describe('CreateTeam.vue', () => {
 
     expect(actual).toBe('Create Team ...')
   })
-  describe('should expose input', () => {
+  describe('given component is mounted', () => {
     test('should present teamName', async () => {
       const target = mountComponentWithPinia()
 
@@ -25,6 +25,25 @@ describe('CreateTeam.vue', () => {
       const actual = await target.find('#teamDescription').attributes('type')
 
       expect(actual).toBe('text')
+    })
+    test('should present save button', async () => {
+      const target = mountComponentWithPinia()
+
+      const actual = await target.find('#executeButton').text()
+
+      expect(actual).toBe('Create Team')
+    })
+  })
+
+  describe('given component mounted', () => {
+    test('and teamName is changed', async () => {
+      const target = mountComponentWithPinia()
+
+      const input = target.find('#teamName')
+
+      await input.setValue('Team Name2')
+
+      expect(target.vm.$refs.teamName).toBe('Team Name2')
     })
   })
 })
