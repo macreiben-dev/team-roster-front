@@ -22,7 +22,8 @@ onMounted(async () => {
 
   console.log('Loginin.vue mounted', snapShotConnectedUserStore)
 
-  const cookie = createCookieRepository().getToken()
+  const allCookies = createCookieRepository()
+  const cookie = allCookies.getToken()
 
   if (!cookie) {
     redirectoToAuthenticationPage()
@@ -39,6 +40,7 @@ onMounted(async () => {
 
   if (connectedUserStore.isLoggedIn === false) {
     console.info('User not logged in, redirecting to loginin spa page', logContext)
+    allCookies.clearToken()
     router.push('/loginin')
   }
 
