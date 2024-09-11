@@ -36,25 +36,42 @@ describe('CreateTeam.vue', () => {
   })
 
   describe('given component mounted', () => {
-    test('and teamName is changed', async () => {
-      const target = mountComponentWithPinia()
+    describe('and teamName is changed', () => {
+      test('and teamName isValid', async () => {
+        const target = mountComponentWithPinia()
 
-      const input = target.find('[data-test="teamName"]')
+        const input = target.find('[data-test="teamName"]')
 
-      await input.setValue('Team Name2')
+        await input.setValue('Team Name2')
 
-      // @ts-ignore
-      expect(target.vm.teamName).toBe('Team Name2')
+        // @ts-ignore
+        expect(target.vm.teamName).toBe('Team Name2')
+      })
+      describe('and teamName is invalid', () => {
+        test('then highlight', async () => {
+          const target = mountComponentWithPinia()
+
+          const input = target.find('[data-test="teamName"]')
+
+          await input.setValue('')
+
+          // @ts-ignore
+          expect(target.vm.teamName).toBe('')
+        })
+      })
     })
-    test('and teamDescription is changed', async () => {
-      const target = mountComponentWithPinia()
 
-      const input = target.find('[data-test="teamName"]')
+    describe('and teamDescription is changed', () => {
+      test('and teamDescription isValid', async () => {
+        const target = mountComponentWithPinia()
 
-      await input.setValue('Team desc3')
+        const input = target.find('[data-test="teamName"]')
 
-      // @ts-ignore
-      expect(target.vm.teamName).toBe('Team desc3')
+        await input.setValue('Team desc3')
+
+        // @ts-ignore
+        expect(target.vm.teamName).toBe('Team desc3')
+      })
     })
   })
 })
