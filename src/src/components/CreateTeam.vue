@@ -24,12 +24,17 @@ function executeCreateTeam(event: Event) {
     <form @submit="executeCreateTeam">
       <div class="one-row">
         <label for="teamName">Team Name:</label>
-        <input type="text" id="teamName" v-model="teamName" />
+        <input type="text" id="teamName" v-model="teamName" data-test="teamName" />
       </div>
 
       <div class="one-row">
         <label for="teamDescription">Team Description:</label>
-        <input type="text" id="teamDescription" v-model="teamDescription" />
+        <input
+          type="text"
+          id="teamDescription"
+          v-model="teamDescription"
+          data-test="teamDescription"
+        />
       </div>
       <div>
         <button id="executeButton" class="action-button" @click="executeCreateTeam">

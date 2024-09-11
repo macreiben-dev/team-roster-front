@@ -2,6 +2,7 @@ import CreateTeam from '@/components/CreateTeam.vue'
 import { mount } from '@vue/test-utils'
 import { createPinia } from 'pinia'
 import { describe, expect, test } from 'vitest'
+import type { ICreateTeam } from './ICreateTeam'
 
 describe('CreateTeam.vue', () => {
   test('should present title', async () => {
@@ -39,11 +40,22 @@ describe('CreateTeam.vue', () => {
     test('and teamName is changed', async () => {
       const target = mountComponentWithPinia()
 
-      const input = target.find('#teamName')
+      const input = target.find('[data-test="teamName"]')
 
       await input.setValue('Team Name2')
 
-      expect(target.vm.$refs.teamName).toBe('Team Name2')
+      // @ts-ignore
+      expect(target.vm.teamName).toBe('Team Name2')
+    })
+    test('and teamDescription is changed', async () => {
+      const target = mountComponentWithPinia()
+
+      const input = target.find('[data-test="teamName"]')
+
+      await input.setValue('Team desc3')
+
+      // @ts-ignore
+      expect(target.vm.teamName).toBe('Team desc3')
     })
   })
 })
