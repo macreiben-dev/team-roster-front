@@ -2,6 +2,9 @@ import { describe, expect, test } from 'vitest'
 
 import { validateTeamName } from '@/services/validators/TeamValidators'
 
+const MESSAGE_TEAMNAME_MINIMUM_LENGTH = 'Team name minimum length is 3'
+const MESSAGE_TEAMNAME_REQUIRED = 'Team name is required'
+
 describe('TeamNameValidator', () => {
   describe('GIVEN teamName is empty', () => {
     test('THEN isValid is false', () => {
@@ -22,7 +25,7 @@ describe('TeamNameValidator', () => {
       const actual = validateTeamName(teamName).message[0]
 
       // Assert
-      expect(actual).toBe('Team name is required')
+      expect(actual).toBe(MESSAGE_TEAMNAME_REQUIRED)
     })
   })
   describe('GIVEN teamName is less than 3 characters', () => {
@@ -44,7 +47,7 @@ describe('TeamNameValidator', () => {
       const actual = validateTeamName(teamName).message[0]
 
       // Assert
-      expect(actual).toBe('Team name minimum length is 3')
+      expect(actual).toBe(MESSAGE_TEAMNAME_MINIMUM_LENGTH)
     })
   })
 })
