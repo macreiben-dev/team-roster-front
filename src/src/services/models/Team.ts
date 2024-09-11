@@ -1,4 +1,5 @@
 const MINIMUM_TEAMNAME_LENGTH = 3
+const EMPTY = ''
 class Team {
   errorMessage(properyName: string): string {
     if (this.isNameEmpty()) {
@@ -37,7 +38,7 @@ class Team {
   }
 
   private isNameEmpty() {
-    return this.name === ''
+    return this.name === EMPTY
   }
 }
 
