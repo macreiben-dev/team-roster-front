@@ -21,10 +21,6 @@
     rounded-sm;
   }
 
-  input[type='text'].validation-error {
-    @apply border-red;
-  }
-
   .action-button {
     @apply text-center px-6 py-2 
       ring ring-gray-dark rounded-sm 
@@ -39,7 +35,9 @@
 
 @layer app-component {
   @tailwind components;
-
+  .validation-error {
+    @apply border-orange hover:border-yellow;
+  }
   .action-button-padded {
     @apply my-3;
   }
