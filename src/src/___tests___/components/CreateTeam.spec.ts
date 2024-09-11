@@ -2,7 +2,6 @@ import CreateTeam from '@/components/CreateTeam.vue'
 import { mount } from '@vue/test-utils'
 import { createPinia } from 'pinia'
 import { describe, expect, test } from 'vitest'
-import type { ICreateTeam } from './ICreateTeam'
 
 describe('CreateTeam.vue', () => {
   test('should present title', async () => {
