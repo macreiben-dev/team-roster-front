@@ -1,10 +1,15 @@
 import Team from '@/services/models/Team'
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it, vi } from 'vitest'
 
 const MESSAGE_TEAMNAME_REQUIRED = 'Team name is required'
 const MESSAGE_TEAMNAME_MINIMUM_LENGTH = 'Team name minimum length is 3'
 
 describe('Team', () => {
+  beforeAll(() => {
+    vi.spyOn(console, 'log').mockImplementation(() => undefined)
+    vi.spyOn(console, 'error').mockImplementation(() => undefined)
+  })
+
   describe('Convert to JSON', () => {
     it('given teamName is "Team Name" and id is "1" then asJson returns { id: 1, name: "Team Name" }', () => {
       // Arrange
