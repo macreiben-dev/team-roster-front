@@ -11,6 +11,8 @@ class FakeCookieRepository implements ICookieRepository {
   getToken(): string | null {
     return this.token
   }
+
+  clearToken(): void {}
 }
 
 export default FakeCookieRepository
