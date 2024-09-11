@@ -2,10 +2,12 @@
 import { ref } from 'vue'
 
 import { useTeamRoster } from '@/stores/teamStore'
+import { validateTeamName } from '@/services/validators/TeamValidators'
 
 const store = useTeamRoster()
 const teamName = ref('')
 const teamDescription = ref('')
+const isTeamNameValid = ref(false)
 
 function executeCreateTeam(event: Event) {
   event.preventDefault()
@@ -13,6 +15,12 @@ function executeCreateTeam(event: Event) {
   console.log('teamName:', teamName.value)
 
   store.createTeam(teamName.value, teamDescription.value)
+}
+
+function validateTeamNameValue() {
+  isTeamNameValid.value = validateTeamName(teamName.value).isValid
+
+  console.info('isTeamNameValid:', isTeamNameValid.value)
 }
 </script>
 
@@ -24,7 +32,14 @@ function executeCreateTeam(event: Event) {
     <form @submit="executeCreateTeam">
       <div class="one-row">
         <label for="teamName">Team Name:</label>
-        <input type="text" id="teamName" v-model="teamName" data-test="teamName" />
+        <input
+          type="text"
+          id="teamName"
+          v-model="teamName"
+          :class="{ 'validation-error': !isTeamNameValid }"
+          @blur="validateTeamNameValue()"
+          data-test="teamName"
+        />
       </div>
 
       <div class="one-row">
