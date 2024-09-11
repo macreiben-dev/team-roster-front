@@ -1,6 +1,9 @@
 import Team from '@/services/models/Team'
 import { describe, expect, it } from 'vitest'
 
+const MESSAGE_TEAMNAME_REQUIRED = 'Team name is required'
+const MESSAGE_TEAMNAME_MINIMUM_LENGTH = 'Team name minimum length is 3'
+
 describe('Team', () => {
   describe('Convert to JSON', () => {
     it('given teamName is "Team Name" and id is "1" then asJson returns { id: 1, name: "Team Name" }', () => {
@@ -43,7 +46,7 @@ describe('Team', () => {
       const actual = team.errorMessage('teamName')
 
       // Assert
-      expect(actual).toBe('Team name is required')
+      expect(actual).toBe(MESSAGE_TEAMNAME_REQUIRED)
     })
     it('given team name is less than 3 character then errorMessage(teamName) returns "Team name minimum length is 3"', () => {
       // Arrange
@@ -54,7 +57,7 @@ describe('Team', () => {
         const actual = element.errorMessage('teamName')
 
         // Assert
-        expect(actual).toBe('Team name minimum length is 3')
+        expect(actual).toBe(MESSAGE_TEAMNAME_MINIMUM_LENGTH)
       })
     })
   })
