@@ -1,4 +1,8 @@
 class Team {
+  validate() {
+    if (this.name === '') return false
+    return true
+  }
   name: string
   id: number
   constructor(id: number, name: string) {
