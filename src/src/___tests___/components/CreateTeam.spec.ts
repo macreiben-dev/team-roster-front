@@ -4,22 +4,22 @@ import { createPinia } from 'pinia'
 import { describe, expect, test } from 'vitest'
 
 describe('CreateTeam.vue', () => {
-  test('should present title', async () => {
+  test('THEN present title', async () => {
     const target = mountComponentWithPinia()
 
     const actual = await target.find('#currentTitle').text()
 
     expect(actual).toBe('Create Team ...')
   })
-  describe('given component is mounted', () => {
-    test('should present teamName', async () => {
+  describe('GIVEN component is mounted', () => {
+    test('THEN present teamName', async () => {
       const target = mountComponentWithPinia()
 
       const actual = await target.find('#teamName').attributes('type')
 
       expect(actual).toBe('text')
     })
-    test('should present teamName', async () => {
+    test('THEN present teamName', async () => {
       const target = mountComponentWithPinia()
 
       const actual = await target.find('#teamDescription').attributes('type')
@@ -35,9 +35,9 @@ describe('CreateTeam.vue', () => {
     })
   })
 
-  describe('given component mounted', () => {
-    describe('and teamName is changed', () => {
-      test('and teamName isValid', async () => {
+  describe('GIVEN component mounted', () => {
+    describe('AND teamName is changed', () => {
+      test('AND teamName isValid', async () => {
         const target = mountComponentWithPinia()
 
         const input = target.find('[data-test="teamName"]')
@@ -47,8 +47,8 @@ describe('CreateTeam.vue', () => {
         // @ts-ignore
         expect(target.vm.teamName).toBe('Team Name2')
       })
-      describe('and teamName is invalid', () => {
-        test('then highlight', async () => {
+      describe('AND teamName is invalid', () => {
+        test('THEN highlight', async () => {
           const target = mountComponentWithPinia()
 
           const input = target.find('[data-test="teamName"]')
@@ -61,17 +61,15 @@ describe('CreateTeam.vue', () => {
       })
     })
 
-    describe('and teamDescription is changed', () => {
-      test('and teamDescription isValid', async () => {
-        const target = mountComponentWithPinia()
+    test('AND teamDescription is changed', async () => {
+      const target = mountComponentWithPinia()
 
-        const input = target.find('[data-test="teamName"]')
+      const input = target.find('[data-test="teamName"]')
 
-        await input.setValue('Team desc3')
+      await input.setValue('Team desc3')
 
-        // @ts-ignore
-        expect(target.vm.teamName).toBe('Team desc3')
-      })
+      // @ts-ignore
+      expect(target.vm.teamName).toBe('Team desc3')
     })
   })
 })

@@ -1,4 +1,4 @@
-import ValidationResult from './ValidationResult'
+import ValidationResult, { type IValidationResult } from './ValidationResult'
 
 const MINIMUM_TEAMNAME_LENGTH = 3
 const EMPTY = ''
@@ -6,7 +6,7 @@ const EMPTY = ''
 const MESSAGE_TEAMNAME_REQUIRED = 'Team name is required'
 const MESSAGE_TEAMNAME_MINIMUM_LENGTH = 'Team name minimum length is 3'
 
-function validateTeamName(source: string): ValidationResult {
+function validateTeamName(source: string): IValidationResult {
   const messages: string[] = []
 
   if (isNameEmpty(source)) {

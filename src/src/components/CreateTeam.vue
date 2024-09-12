@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 import { useTeamRoster } from '@/stores/teamStore'
-import { validateTeamName } from '@/services/validators/TeamValidators'
+import { validateTeamName } from '@/services/validators/TeamPropertiesValidator'
 
 const store = useTeamRoster()
 const teamName = ref('')
