@@ -26,7 +26,7 @@ describe('CreateTeam.vue', () => {
 
       expect(actual).toBe('text')
     })
-    test('should present save button', async () => {
+    test('THEN present save button', async () => {
       const target = mountComponentWithPinia()
 
       const actual = await target.find('#executeButton').text()
