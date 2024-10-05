@@ -12,7 +12,7 @@ function toCreateTeam() {
 <template>
   <div>
     <div>
-      <h1>Hello {{ store.currentUserName }}</h1>
+      <h1 id="currentTitle">Hello {{ store.currentUserName }}</h1>
     </div>
     <div>
       <button class="action-button action-button-padded" @click="toCreateTeam">
