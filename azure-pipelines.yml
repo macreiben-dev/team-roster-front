@@ -15,14 +15,19 @@ steps:
       versionSpec: "20.x"
     displayName: "Install Node.js"
 
-  - script: |
-      npm install
-      npm run build:prod
-    displayName: "npm install and build"
-    workingDirectory: src
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
 
-  - script: |
-      npm install
-      npm run test
-    displayName: "npm test"
-    workingDirectory: src
+- script: |
+    npm install
+    npm run build:prod
+  displayName: 'npm install and build'
+  workingDirectory: src
+
+- script: |
+    npm install
+    npm run test
+  displayName: 'npm test'
+  workingDirectory: src
