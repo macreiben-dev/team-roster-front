@@ -16,6 +16,9 @@ import { FakeTeams } from '../fakes/FakeTeams'
 import Team from '@/services/models/Team'
 import type { ITeams } from '@/stores/contractTeamStore'
 
+const team01 = new Team(1, 'Team 1')
+
+const currentFakeTeams = new FakeTeams([])
 vi.mock('@/repositories/TenantRepository')
 const mockedredirectoToAuthenticationPage = vi.mocked(redirectoToAuthenticationPage)
 
@@ -24,10 +27,6 @@ const mockedCreateCookieRepository = vi.mocked(createCookieRepository)
 
 vi.mock('@/repositories/UserLocalRepository')
 const mockedGetUserInformation = vi.mocked(getUserInformation)
-
-const team01 = new Team(1, 'Team 1')
-
-const currentFakeTeams = new FakeTeams([])
 
 vi.mock('@/repositories/TeamsRepository', () => ({
   createTeamsRepository: (): ITeams => currentFakeTeams
