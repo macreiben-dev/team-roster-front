@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer app-base, app-component, app-utilities;
+
+@layer app-base {
+  @tailwind base;
+  h1 {
+    @apply text-2xl;
+  }
+
+  label {
+    @apply mx-3;
+  }
+
+  input[type='text'] {
+    @apply px-2 py-1 
+    border-2 border-gray-dark 
+    hover:border-purple
+    rounded-sm;
+  }
+
+  .action-button {
+    @apply text-center px-6 py-2 
+      ring ring-gray-dark rounded-sm 
+      hover:ring-purple
+      active:ring-orange;
+  }
+
+  .one-row {
+    @apply my-2;
+  }
+}
+
+@layer app-component {
+  @tailwind components;
+  .validation-error {
+    @apply border-orange hover:border-yellow;
+  }
+  .action-button-padded {
+    @apply my-3;
+  }
+}
