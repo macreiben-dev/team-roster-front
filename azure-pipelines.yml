@@ -24,10 +24,10 @@ steps:
       npm install
       npm run build:prod
     displayName: 'npm install and build'
-    workingDirectory: front
+    workingDirectory: src
 
   - script: |
       npm install
       npm run test
     displayName: 'npm test'
-    workingDirectory: front
+    workingDirectory: src
