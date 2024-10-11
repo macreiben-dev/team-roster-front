@@ -33,10 +33,14 @@ jobs:
     dependsOn: build
     steps:
       - script: |
+          npm install
+        displayName: "npm install"
+        workingDirectory: src
+
+      - script: |
           npm run build:prod
-          ls -al src
-          ls -al src/dist
-        displayName: "Diag"
+        displayName: "npm build"
+        workingDirectory: src
 
       - task: CopyFilesOverSSH@0
         displayName: "Copy to remote server"
