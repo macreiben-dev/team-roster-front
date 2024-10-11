@@ -38,7 +38,7 @@ steps:
   - script: |
       rm -rf src/node_modules
       rm -rf src/dist
-      rm -rf src/.git
+      rm -rf .git
     displayName: "Remove node_modules, dist, and .git"
 
   - task: CopyFilesOverSSH@0
