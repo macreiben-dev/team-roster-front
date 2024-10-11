@@ -34,7 +34,6 @@ jobs:
     steps:
       - script: |
           rm -rf src/node_modules
-          rm -rf src/dist
           rm -rf .git
         displayName: "Remove node_modules, dist, and .git"
 
@@ -43,8 +42,8 @@ jobs:
         inputs:
           cleanTargetFolder: true
           sshEndpoint: ssh-team-roster
-          contents: "**/*"
-          targetFolder: "~/deploy"
+          contents: "src/dist/*"
+          targetFolder: "~/deploy/src/dist"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
       - task: SSH@0
