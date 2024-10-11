@@ -33,16 +33,16 @@ jobs:
     dependsOn: build
     steps:
       - script: |
-          rm -rf src/node_modules
-          rm -rf .git
-        displayName: "Remove node_modules, dist, and .git"
+          ls -al src
+          ls -al src/dist
+        displayName: "Diag"
 
       - task: CopyFilesOverSSH@0
         displayName: "Copy to remote server"
         inputs:
           cleanTargetFolder: true
           sshEndpoint: ssh-team-roster
-          contents: "src/dist/*"
+          contents: "src/dist/**"
           targetFolder: "~/deploy/src/dist"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
