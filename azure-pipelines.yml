@@ -33,6 +33,7 @@ jobs:
     dependsOn: build
     steps:
       - script: |
+          npm run build:prod
           ls -al src
           ls -al src/dist
         displayName: "Diag"
@@ -46,6 +47,7 @@ jobs:
           targetFolder: "~/deploy/src/dist"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
+
       - task: SSH@0
         displayName: "create docker image"
         inputs:
