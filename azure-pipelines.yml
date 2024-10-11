@@ -46,3 +46,4 @@ jobs:
           contents: "**/*"
           targetFolder: "~/deploy"
           readyTimeout: "20000"
+          delayBetweenUploads: "5"
