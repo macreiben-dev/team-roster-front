@@ -28,7 +28,7 @@ jobs:
         displayName: "npm test"
         workingDirectory: src
 
-  - job: cleanup-and-deploy
+  - job: cleanup_and_deploy
     displayName: "Cleanup and Deploy Job"
     dependsOn: build
     steps:
