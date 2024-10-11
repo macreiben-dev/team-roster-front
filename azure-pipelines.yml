@@ -47,3 +47,11 @@ jobs:
           targetFolder: "~/deploy"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
+      - task: SSH@0
+        displayName: "create docker image"
+        inputs:
+          sshEndpoint: ssh-team-roster
+          runOptions: "inline"
+          inline: |
+            cd ~/deploy/src
+            sudo docker build . -t "team-roster-front" 2>&1
