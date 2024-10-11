@@ -35,11 +35,17 @@ steps:
     displayName: "npm test"
     workingDirectory: src
 
+  - script: |
+      rm -rf src/node_modules
+      rm -rf src/dist
+      rm -rf src/.git
+    displayName: "Remove node_modules, dist, and .git"
+
   - task: CopyFilesOverSSH@0
     displayName: "Copy to remote server"
     inputs:
       cleanTargetFolder: true
       sshEndpoint: ssh-team-roster
-      contents: '**/*\n!src/node_modules/**\n!.git/**'
+      contents: "**/*"
       targetFolder: "~/deploy"
       readyTimeout: "20000"
