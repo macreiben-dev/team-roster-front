@@ -36,7 +36,7 @@ steps:
     workingDirectory: src
 
   - task: CopyFilesOverSSH@0
-    displayName: "Copy"
+    displayName: "Copy to remote server"
     inputs:
       cleanTargetFolder: true
       sshEndpoint: ssh-team-roster
