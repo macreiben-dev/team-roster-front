@@ -40,6 +40,6 @@ steps:
     inputs:
       cleanTargetFolder: true
       sshEndpoint: ssh-team-roster
-      contents: '**'
+      contents: '** \n !**/node_modules/**'
       targetFolder: "~/deploy"
       readyTimeout: "20000"
