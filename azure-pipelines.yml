@@ -32,6 +32,17 @@ jobs:
     displayName: "Cleanup and Deploy Job"
     dependsOn: build
     steps:
+      - task: DownloadSecureFile@1
+        displayName: download .env.production
+        inputs:
+          secureFile: ".env.production"
+
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: $(Agent.TempDirectory)
+          Contents: '**\.env.production'
+          TargetFolder: src/src
+
       - script: |
           npm install
         displayName: "npm install"

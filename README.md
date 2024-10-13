@@ -25,7 +25,7 @@ import { createTestingPinia } from '@pinia/testing'
 
 function createWrappedComponent() {
   return mount(LoginIn, {
-    global: {
+    global: { 
       plugins: [
         createPinia()
         createTestingPinia({
