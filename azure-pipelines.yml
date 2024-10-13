@@ -5,9 +5,10 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  sourceFolder: "src"
-  deployDirectory: "/home/team-roster-deploy/deploy"
-  currentSshEndpoint: "ssh-team-roster"
+  - group: TeamRoster-Front-Prod
+    sourceFolder: "src"
+    deployDirectory: "/home/team-roster-deploy/deploy"
+    currentSshEndpoint: "ssh-team-roster"
 
 jobs:
   - job: build
