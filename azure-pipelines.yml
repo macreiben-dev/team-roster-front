@@ -69,8 +69,8 @@ jobs:
         inputs:
           cleanTargetFolder: true
           sshEndpoint: ssh-team-roster
-          contents: "src/DockerFile"
-          targetFolder: "~/deploy/"
+          contents: "src/Docker*"
+          targetFolder: "~/deploy/src"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
 
@@ -80,6 +80,5 @@ jobs:
           sshEndpoint: ssh-team-roster
           runOptions: "inline"
           inline: |
-            pwd
             cd ~/deploy/src
             sudo docker build . -t "team-roster-front" 2>&1
