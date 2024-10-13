@@ -6,9 +6,12 @@ pool:
 
 variables:
   - group: TeamRoster-Front-Prod
-    sourceFolder: "src"
-    deployDirectory: "/home/team-roster-deploy/deploy"
-    currentSshEndpoint: "ssh-team-roster"
+  - name: sourceFolder
+    value: "src"
+  - name: deployDirectory
+    value: "/home/team-roster-deploy/deploy"
+  - name: currentSshEndpoint
+    value: "ssh-team-roster"
 
 jobs:
   - job: build
