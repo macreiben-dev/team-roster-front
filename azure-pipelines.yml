@@ -67,7 +67,7 @@ jobs:
       - task: CopyFilesOverSSH@0
         displayName: "Copy dockerfile to remote server"
         inputs:
-          cleanTargetFolder: true
+          cleanTargetFolder: false
           sshEndpoint: ssh-team-roster
           contents: "src/Docker*"
           targetFolder: "~/deploy"
