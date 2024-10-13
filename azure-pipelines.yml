@@ -38,7 +38,7 @@ jobs:
         workingDirectory: $(sourceFolder)
 
   - job: cleanup_and_deploy
-    displayName: "Cleanup and Deploy Job"
+    displayName: "Deliver"
     dependsOn: build
     steps:
       - script: |
@@ -62,7 +62,7 @@ jobs:
         inputs:
           cleanTargetFolder: true
           sshEndpoint: $(currentSshEndpoint)
-          contents: "src/dist/**"
+          contents: "$(sourceFolder)/dist/**"
           targetFolder: $(deployDirectory)
           readyTimeout: "20000"
           delayBetweenUploads: "5"
