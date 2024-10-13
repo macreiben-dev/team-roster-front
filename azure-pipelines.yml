@@ -80,5 +80,6 @@ jobs:
           sshEndpoint: ssh-team-roster
           runOptions: "inline"
           inline: |
+            pwd
             cd ~/deploy/src
             sudo docker build . -t "team-roster-front" 2>&1
