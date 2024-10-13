@@ -33,11 +33,12 @@ jobs:
     dependsOn: build
     steps:
       - task: DownloadSecureFile@1
-        displayName: download .env.production
+        displayName: "download .env.production"
         inputs:
           secureFile: ".env.production"
 
       - task: CopyFiles@2
+        displayName: "Copy .env.production to root front"
         inputs:
           SourceFolder: $(Agent.TempDirectory)
           Contents: '**\.env.production'
@@ -59,7 +60,7 @@ jobs:
           cleanTargetFolder: true
           sshEndpoint: ssh-team-roster
           contents: "src/dist/**"
-          targetFolder: "~/deploy/src/dist"
+          targetFolder: "~/deploy/"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
 
