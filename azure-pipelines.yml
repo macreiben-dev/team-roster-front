@@ -80,6 +80,4 @@ jobs:
           sshEndpoint: ssh-team-roster
           runOptions: "inline"
           inline: |
-            ls /home/team-roster-deploy/deploy/src
-            ls /home/team-roster-deploy/deploy/src/dist
             sudo docker build --no-cache /home/team-roster-deploy/deploy/src -t "team-roster-front" 2>&1
