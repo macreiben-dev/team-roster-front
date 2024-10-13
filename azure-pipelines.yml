@@ -70,7 +70,7 @@ jobs:
           cleanTargetFolder: true
           sshEndpoint: ssh-team-roster
           contents: "src/Docker*"
-          targetFolder: "~/deploy/src"
+          targetFolder: "~/deploy"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
 
