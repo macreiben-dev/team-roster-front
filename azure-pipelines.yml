@@ -55,11 +55,21 @@ jobs:
         workingDirectory: src
 
       - task: CopyFilesOverSSH@0
-        displayName: "Copy to remote server"
+        displayName: "Copy dist to remote server"
         inputs:
           cleanTargetFolder: true
           sshEndpoint: ssh-team-roster
           contents: "src/dist/**"
+          targetFolder: "~/deploy/"
+          readyTimeout: "20000"
+          delayBetweenUploads: "5"
+
+      - task: CopyFilesOverSSH@0
+        displayName: "Copy dockerfile to remote server"
+        inputs:
+          cleanTargetFolder: true
+          sshEndpoint: ssh-team-roster
+          contents: "src/DockerFile"
           targetFolder: "~/deploy/"
           readyTimeout: "20000"
           delayBetweenUploads: "5"
