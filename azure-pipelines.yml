@@ -82,4 +82,4 @@ jobs:
           inline: |
             ls /home/team-roster-deploy/deploy/src
             ls /home/team-roster-deploy/deploy/src/dist
-            sudo docker build /home/team-roster-deploy/deploy/src -t "team-roster-front" 2>&1
+            sudo docker build /home/team-roster-deploy/deploy/src --progress=plain -t "team-roster-front" 2>&1
