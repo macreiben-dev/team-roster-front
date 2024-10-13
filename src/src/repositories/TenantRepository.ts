@@ -1,5 +1,7 @@
+import { apiLoginUrl } from './confiogurationRepository'
+
 const redirectoToAuthenticationPage = (parentLogContext?: any) => {
-  const authenticationPageUrl = import.meta.env.VITE_API_LOGIN_API
+  const authenticationPageUrl = apiLoginUrl()
 
   const currentLogContext = { ...parentLogContext, apiLoginUrl: authenticationPageUrl }
 
