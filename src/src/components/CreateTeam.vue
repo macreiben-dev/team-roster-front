@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { useTeamRoster } from '@/stores/teamStore'
 import { validateTeamName } from '@/services/validators/TeamPropertiesValidator'
+
+const router = useRouter()
 
 const store = useTeamRoster()
 const teamName = ref('')
@@ -15,6 +18,8 @@ function executeCreateTeam(event: Event) {
   console.log('teamName:', teamName.value)
 
   store.createTeam(teamName.value, teamDescription.value)
+
+  router.push({ name: 'home' })
 }
 
 function validateTeamNameValue() {

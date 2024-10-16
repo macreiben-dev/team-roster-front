@@ -7,7 +7,7 @@ export const useTeamRoster = defineStore('team-roster', {
     team: [] as Team[]
   }),
   getters: {
-    allTeams: (state) => state.team.map((team: Team) => team.asJson())
+    allTeams: (state) => state.team.map((team: Team) => team.asJson() as Team)
   },
   actions: {
     clear() {
