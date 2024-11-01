@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import router from '@/router'
 import { useConnectedUserStore } from '@/stores/connectedUserStore'
+import AllTeams from './AllTeams.vue'
 
 const store = useConnectedUserStore()
 
@@ -19,8 +20,8 @@ function toCreateTeam() {
         Create Team ...
       </button>
     </div>
-    <!-- <div class="action-button">
-      <RouterLink to="/teams/create">CreateTeam</RouterLink>
-    </div> -->
+    <div>
+      <AllTeams />
+    </div>
   </div>
 </template>
