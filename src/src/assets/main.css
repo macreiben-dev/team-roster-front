@@ -31,6 +31,16 @@
   .one-row {
     @apply my-2;
   }
+
+  tr.one-row {
+    @apply border-t-2 border-gray-light
+      
+      hover:border-purple
+      odd:bg-gray-light;
+  }
+  td.one-cell {
+    @apply p-4;
+  }
 }
 
 @layer app-component {

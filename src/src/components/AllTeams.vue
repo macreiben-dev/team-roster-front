@@ -13,16 +13,15 @@ const isEmpty = computed(() => store.allTeams.length === 0)
       <p>... sorry, no teams created !</p>
     </template>
     <template v-else>
-      <table class="table-auto">
+      <table class="table-fixed w-full">
         <thead>
           <tr>
             <th>Name</th>
-            <th>Description</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="team in store.allTeams" :key="team.id" odd:bg-gray-100>
-            <td>{{ team.name }}</td>
+          <tr v-for="team in store.allTeams" :key="team.id" class="one-row">
+            <td class="one-cell">{{ team.name }}</td>
           </tr>
         </tbody>
       </table>
