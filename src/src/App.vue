@@ -1,42 +1,44 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-import router from './router'
-import { useConnectedUserStore } from './stores/connectedUserStore'
-
-onMounted(async () => {
-  const store = useConnectedUserStore()
-
-  const logContext = {
-    file: 'App.vue',
-    function: 'onMounted'
-  }
-
-  if (store.isLoggedIn === false) {
-    console.info('User not logged in, redirecting to loginin spa page', logContext)
-    router.push('/loginin')
-  }
-})
-</script>
-
 <template>
-  <header>
-    <div class="flex ml-4 mb-4 mt-4">
-      <div class="w-1/3"><RouterLink to="/">Home</RouterLink></div>
-      <div class="w-1/3"><RouterLink to="/about">About</RouterLink></div>
-      <div class="w-1/3"><RouterLink to="/profile">Profile</RouterLink></div>
+  <div class="flex">
+    <div class="flex-none mt-1 mr-1 p-1">
+      <button @click="toggleMenu" class="burger-menu text-2xl self-start">☰</button>
+      <div v-if="menuVisible" class="menu flex flex-col">
+        <div class="menu-item"><RouterLink to="/">Home</RouterLink></div>
+        <div class="menu-item"><RouterLink to="/about">About</RouterLink></div>
+        <div class="menu-item"><RouterLink to="/profile">Profile</RouterLink></div>
+      </div>
     </div>
-  </header>
-  <div class="flex ml-4 mb-4 mt-4">
-    <RouterView />
+    <div class="main-view flex-1">
+      <RouterView />
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      menuVisible: false
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible
+    }
+  },
+  mounted() {
+    if (this.$store.state.isLoggedIn === false) {
+      console.info('User not logged in, redirecting to login page')
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
+
 <style scoped>
-body {
-  background-color: white;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+.burger-menu {
+  background: none;
+  border: none;
+  outline: none;
 }
 </style>

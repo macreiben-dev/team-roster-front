@@ -51,4 +51,16 @@
   .action-button-padded {
     @apply my-3;
   }
+
+  .menu-item {
+    @apply mb-2;
+  }
+
+  .menu {
+    @apply mt-2 p-1 mr-6;
+  }
+
+  .main-view {
+    @apply mt-4;
+  }
 }
