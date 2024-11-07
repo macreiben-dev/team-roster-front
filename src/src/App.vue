@@ -14,25 +14,32 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      menuVisible: false
-    }
-  },
-  methods: {
-    toggleMenu() {
-      this.menuVisible = !this.menuVisible
-    }
-  },
-  mounted() {
-    if (this.$store.state.isLoggedIn === false) {
-      console.info('User not logged in, redirecting to login page')
-      this.$router.push('/login')
-    }
-  }
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+import router from './router'
+import { ref } from 'vue'
+import { useConnectedUserStore } from './stores/connectedUserStore'
+
+const menuVisible = ref(false)
+
+function toggleMenu() {
+  menuVisible.value = !menuVisible.value
 }
+
+onMounted(async () => {
+  const store = useConnectedUserStore()
+
+  const logContext = {
+    file: 'App.vue',
+    function: 'onMounted'
+  }
+
+  if (store.isLoggedIn === false) {
+    console.info('User not logged in, redirecting to loginin spa page', logContext)
+    router.push('/loginin')
+  }
+})
 </script>
 
 <style scoped>
