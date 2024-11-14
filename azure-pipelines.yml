@@ -45,8 +45,6 @@ jobs:
           echo "VITE_API_SERVER_URL=$(VITE_API_SERVER_URL)" >  $(sourceFolder)/.env
           echo "VITE_API_PATH_ME=$(VITE_API_PATH_ME)" >> $(sourceFolder)/.env
           echo "VITE_API_LOGIN_API=$(VITE_API_LOGIN_API)" >> $(sourceFolder)/.env
-          echo "VITE_API_SERVER_URL=$(VITE_API_SERVER_URL)"
-          echo "VITE_API_LOGIN_API=$(VITE_API_LOGIN_API)"
         displayName: "Generate .env file"
 
       - script: |
